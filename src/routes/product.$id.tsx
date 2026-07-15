@@ -4,7 +4,7 @@ import { Heart, Minus, Plus, Ruler, ShieldCheck, Sparkles, Star, Truck } from "l
 import { toast } from "sonner";
 import { AppShell } from "@/components/layout/AppShell";
 import { ProductCard } from "@/components/store/ProductCard";
-import { formatNaira, getProduct, relatedProducts } from "@/lib/products";
+import { formatNaira, getProduct, relatedProducts, type Product } from "@/lib/products";
 import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
@@ -137,7 +137,7 @@ function ProductPage() {
                 <span className="text-sm font-semibold">Color · {color.name}</span>
               </div>
               <div className="mt-2 flex gap-2">
-                {product.colors.map((c) => (
+                {product.colors.map((c: { name: string; hex: string }) => (
                   <button
                     key={c.name}
                     onClick={() => setColor(c)}
@@ -160,7 +160,7 @@ function ProductPage() {
                 </button>
               </div>
               <div className="mt-2 flex flex-wrap gap-2">
-                {product.sizes.map((s) => (
+                {product.sizes.map((s: string) => (
                   <button
                     key={s}
                     onClick={() => setSize(s)}
@@ -252,7 +252,7 @@ function ProductPage() {
         <section className="mt-12">
           <h2 className="font-display text-2xl font-black">You may also love</h2>
           <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {related.map((p) => (
+            {related.map((p: Product) => (
               <ProductCard key={p.id} product={p} />
             ))}
           </div>
