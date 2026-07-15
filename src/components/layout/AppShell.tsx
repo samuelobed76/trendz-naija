@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Heart, Home, Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { Heart, Home, Menu, Scissors, Search, ShoppingBag, User, X } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { useStore } from "@/lib/store";
 import { CATEGORIES } from "@/lib/products";
@@ -43,6 +43,9 @@ function Header() {
           </Link>
           <Link to="/shop" className="hover:text-primary transition-colors">
             Shop
+          </Link>
+          <Link to="/tailors" className="hover:text-primary transition-colors">
+            Tailors
           </Link>
           {CATEGORIES.slice(0, 4).map((c) => (
             <Link
@@ -105,6 +108,9 @@ function Header() {
             <Link to="/shop" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
               Shop all
             </Link>
+            <Link to="/tailors" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+              Find tailors
+            </Link>
             {CATEGORIES.map((c) => (
               <Link
                 key={c}
@@ -132,7 +138,7 @@ function BottomNav() {
   const items = [
     { to: "/", label: "Home", icon: Home },
     { to: "/shop", label: "Shop", icon: Search },
-    { to: "/wishlist", label: "Saved", icon: Heart },
+    { to: "/tailors", label: "Tailors", icon: Scissors },
     { to: "/cart", label: "Cart", icon: ShoppingBag, badge: cartCount },
     { to: "/account", label: "Me", icon: User },
   ] as const;
