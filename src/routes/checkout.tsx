@@ -1,10 +1,11 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Banknote, CreditCard, Truck } from "lucide-react";
 import { toast } from "sonner";
 import { AppShell } from "@/components/layout/AppShell";
 import { formatNaira, getProduct } from "@/lib/products";
 import { useStore } from "@/lib/store";
+import { createOrder } from "@/lib/orders";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/checkout")({
@@ -17,6 +18,7 @@ type Pay = "card" | "transfer" | "cod";
 function Checkout() {
   const { cart, clearCart } = useStore();
   const navigate = useNavigate();
+  const formRef = useRef<HTMLFormElement>(null);
   const items = cart
     .map((i) => ({ ...i, product: getProduct(i.productId) }))
     .filter((i): i is typeof i & { product: NonNullable<typeof i.product> } => !!i.product);
@@ -29,9 +31,34 @@ function Checkout() {
 
   const onPlace = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Order placed!", { description: "You'll receive tracking updates by SMS and email." });
+    const fd = new FormData(e.currentTarget as HTMLFormElement);
+    const order = createOrder({
+      items: items.map((i) => ({
+        productId: i.productId,
+        size: i.size,
+        qty: i.qty,
+        priceAtPurchase: i.product.price,
+      })),
+      subtotal,
+      shipping,
+      total,
+      contact: {
+        name: String(fd.get("name") ?? ""),
+        phone: String(fd.get("phone") ?? ""),
+        email: String(fd.get("email") ?? ""),
+      },
+      address: {
+        street: String(fd.get("street") ?? ""),
+        city: String(fd.get("city") ?? ""),
+        state,
+      },
+      payment: pay,
+    });
+    toast.success("Order placed!", {
+      description: `Tracking ${order.id} — updates on the way.`,
+    });
     clearCart();
-    void navigate({ to: "/" });
+    void navigate({ to: "/orders/$id", params: { id: order.id } });
   };
 
   if (items.length === 0) {
@@ -49,14 +76,14 @@ function Checkout() {
     <AppShell>
       <div className="mx-auto max-w-6xl px-4 py-6 md:py-10">
         <h1 className="font-display text-3xl font-black md:text-4xl">Checkout</h1>
-        <form onSubmit={onPlace} className="mt-6 grid gap-8 md:grid-cols-[1fr_360px]">
+        <form ref={formRef} onSubmit={onPlace} className="mt-6 grid gap-8 md:grid-cols-[1fr_360px]">
           <div className="space-y-6">
             <Card title="Contact">
               <div className="grid gap-3 md:grid-cols-2">
-                <Field label="Full name" placeholder="Adaeze Okafor" required />
-                <Field label="Phone" placeholder="+234 801 234 5678" required />
+                <Field label="Full name" name="name" placeholder="Adaeze Okafor" required />
+                <Field label="Phone" name="phone" placeholder="+234 801 234 5678" required />
                 <div className="md:col-span-2">
-                  <Field label="Email" type="email" placeholder="you@example.com" required />
+                  <Field label="Email" name="email" type="email" placeholder="you@example.com" required />
                 </div>
               </div>
             </Card>
@@ -64,9 +91,9 @@ function Checkout() {
             <Card title="Delivery address">
               <div className="grid gap-3 md:grid-cols-2">
                 <div className="md:col-span-2">
-                  <Field label="Street address" placeholder="14 Awolowo Road" required />
+                  <Field label="Street address" name="street" placeholder="14 Awolowo Road" required />
                 </div>
-                <Field label="City" placeholder="Ikoyi" required />
+                <Field label="City" name="city" placeholder="Ikoyi" required />
                 <label className="grid gap-1 text-sm">
                   <span className="font-medium">State</span>
                   <select

@@ -13,11 +13,13 @@ import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as TailorsRouteImport } from './routes/tailors'
 import { Route as SplashRouteImport } from './routes/splash'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
+import { Route as OrdersRouteImport } from './routes/orders.'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
@@ -37,6 +39,11 @@ const SplashRoute = SplashRouteImport.update({
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdersRoute = OrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -64,16 +71,23 @@ const ProductIdRoute = ProductIdRouteImport.update({
   path: '/product/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrdersRoute = OrdersRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => OrdersRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/orders': typeof OrdersRouteWithChildren
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
   '/wishlist': typeof WishlistRoute
+  '/orders/': typeof OrdersRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesByTo {
@@ -85,6 +99,7 @@ export interface FileRoutesByTo {
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
   '/wishlist': typeof WishlistRoute
+  '/orders': typeof OrdersRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesById {
@@ -93,10 +108,12 @@ export interface FileRoutesById {
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/orders': typeof OrdersRouteWithChildren
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
   '/wishlist': typeof WishlistRoute
+  '/orders/': typeof OrdersRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRouteTypes {
@@ -106,10 +123,12 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/checkout'
+    | '/orders'
     | '/shop'
     | '/splash'
     | '/tailors'
     | '/wishlist'
+    | '/orders/'
     | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -121,6 +140,7 @@ export interface FileRouteTypes {
     | '/splash'
     | '/tailors'
     | '/wishlist'
+    | '/orders'
     | '/product/$id'
   id:
     | '__root__'
@@ -128,10 +148,12 @@ export interface FileRouteTypes {
     | '/account'
     | '/cart'
     | '/checkout'
+    | '/orders'
     | '/shop'
     | '/splash'
     | '/tailors'
     | '/wishlist'
+    | '/orders/'
     | '/product/$id'
   fileRoutesById: FileRoutesById
 }
@@ -140,6 +162,7 @@ export interface RootRouteChildren {
   AccountRoute: typeof AccountRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
+  OrdersRoute: typeof OrdersRouteWithChildren
   ShopRoute: typeof ShopRoute
   SplashRoute: typeof SplashRoute
   TailorsRoute: typeof TailorsRoute
@@ -177,6 +200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/orders': {
+      id: '/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof OrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout': {
       id: '/checkout'
       path: '/checkout'
@@ -212,14 +242,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/orders/': {
+      id: '/orders/'
+      path: '/'
+      fullPath: '/orders/'
+      preLoaderRoute: typeof OrdersRouteImport
+      parentRoute: typeof OrdersRoute
+    }
   }
 }
+
+interface OrdersRouteChildren {
+  OrdersRoute: typeof OrdersRoute
+}
+
+const OrdersRouteChildren: OrdersRouteChildren = {
+  OrdersRoute: OrdersRoute,
+}
+
+const OrdersRouteWithChildren =
+  OrdersRoute._addFileChildren(OrdersRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
+  OrdersRoute: OrdersRouteWithChildren,
   ShopRoute: ShopRoute,
   SplashRoute: SplashRoute,
   TailorsRoute: TailorsRoute,

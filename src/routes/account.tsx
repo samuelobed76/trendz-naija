@@ -33,7 +33,7 @@ function AccountPage() {
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <Tile icon={Package} title="Orders" desc="Track and reorder past pieces" />
+          <Tile icon={Package} title="Orders" desc="Track and reorder past pieces" href="/orders" />
           <Tile icon={Ruler} title="My sizes" desc="Save your measurements for accurate fits" />
           <Tile icon={MapPin} title="Addresses" desc="Manage delivery locations" />
           <Tile icon={Heart} title="Wishlist" desc="Your saved styles" href="/wishlist" />
