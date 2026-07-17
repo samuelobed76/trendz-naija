@@ -18,6 +18,7 @@ import { Route as CartRouteImport } from './routes/cart'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
+import { Route as OrdersRouteImport } from './routes/orders.'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
@@ -64,6 +65,11 @@ const ProductIdRoute = ProductIdRouteImport.update({
   path: '/product/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrdersRoute = OrdersRouteImport.update({
+  id: '/orders/',
+  path: '/orders/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -74,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
   '/wishlist': typeof WishlistRoute
+  '/orders/': typeof OrdersRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesByTo {
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
   '/wishlist': typeof WishlistRoute
+  '/orders': typeof OrdersRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesById {
@@ -97,6 +105,7 @@ export interface FileRoutesById {
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
   '/wishlist': typeof WishlistRoute
+  '/orders/': typeof OrdersRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRouteTypes {
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
     | '/splash'
     | '/tailors'
     | '/wishlist'
+    | '/orders/'
     | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
     | '/splash'
     | '/tailors'
     | '/wishlist'
+    | '/orders'
     | '/product/$id'
   id:
     | '__root__'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
     | '/splash'
     | '/tailors'
     | '/wishlist'
+    | '/orders/'
     | '/product/$id'
   fileRoutesById: FileRoutesById
 }
@@ -144,6 +156,7 @@ export interface RootRouteChildren {
   SplashRoute: typeof SplashRoute
   TailorsRoute: typeof TailorsRoute
   WishlistRoute: typeof WishlistRoute
+  OrdersRoute: typeof OrdersRoute
   ProductIdRoute: typeof ProductIdRoute
 }
 
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/orders/': {
+      id: '/orders/'
+      path: '/orders'
+      fullPath: '/orders/'
+      preLoaderRoute: typeof OrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -224,6 +244,7 @@ const rootRouteChildren: RootRouteChildren = {
   SplashRoute: SplashRoute,
   TailorsRoute: TailorsRoute,
   WishlistRoute: WishlistRoute,
+  OrdersRoute: OrdersRoute,
   ProductIdRoute: ProductIdRoute,
 }
 export const routeTree = rootRouteImport
