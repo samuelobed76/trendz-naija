@@ -111,6 +111,9 @@ function Header() {
             <Link to="/tailors" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
               Find tailors
             </Link>
+            <Link to="/orders" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+              My orders
+            </Link>
             {CATEGORIES.map((c) => (
               <Link
                 key={c}
