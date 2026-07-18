@@ -31,7 +31,7 @@ import {
 } from "@/lib/orders";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/orders/")({
+export const Route = createFileRoute("/orders/$id")({
   component: TrackOrder,
   head: () => ({ meta: [{ title: "Track your order — StyleNaija" }] }),
 });
