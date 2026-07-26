@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Bell, Heart, LogIn, MapPin, Package, Ruler, User } from "lucide-react";
+import { Bell, Crown, Heart, LogIn, MapPin, MessagesSquare, Package, Ruler, User } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 
 export const Route = createFileRoute("/account")({
@@ -34,6 +34,8 @@ function AccountPage() {
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <Tile icon={Package} title="Orders" desc="Track and reorder past pieces" href="/orders" />
+          <Tile icon={Crown} title="StyleNaija Prime" desc="Free delivery, priority chat, early drops" href="/premium" />
+          <Tile icon={MessagesSquare} title="Messages" desc="Chat your tailors and designers" href="/chat" />
           <Tile icon={Ruler} title="My sizes" desc="Save your measurements for accurate fits" />
           <Tile icon={MapPin} title="Addresses" desc="Manage delivery locations" />
           <Tile icon={Heart} title="Wishlist" desc="Your saved styles" href="/wishlist" />

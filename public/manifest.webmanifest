@@ -1,0 +1,12 @@
+{
+  "name": "StyleNaija — Nigerian Fashion",
+  "short_name": "StyleNaija",
+  "description": "Shop Nigerian fashion, find tailors near you and chat designers directly.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdf8f2",
+  "theme_color": "#c2542a",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" }
+  ]
+}

@@ -13,13 +13,16 @@ import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as TailorsRouteImport } from './routes/tailors'
 import { Route as SplashRouteImport } from './routes/splash'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as PremiumRouteImport } from './routes/premium'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ChatRouteImport } from './routes/chat'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 import { Route as OrdersIdRouteImport } from './routes/orders.$id'
+import { Route as ChatTailorIdRouteImport } from './routes/chat.$tailorId'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
@@ -41,6 +44,11 @@ const ShopRoute = ShopRouteImport.update({
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PremiumRoute = PremiumRouteImport.update({
+  id: '/premium',
+  path: '/premium',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrdersRoute = OrdersRouteImport.update({
   id: '/orders',
   path: '/orders',
@@ -49,6 +57,11 @@ const OrdersRoute = OrdersRouteImport.update({
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -76,17 +89,25 @@ const OrdersIdRoute = OrdersIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => OrdersRoute,
 } as any)
+const ChatTailorIdRoute = ChatTailorIdRouteImport.update({
+  id: '/$tailorId',
+  path: '/$tailorId',
+  getParentRoute: () => ChatRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
   '/orders': typeof OrdersRouteWithChildren
+  '/premium': typeof PremiumRoute
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
   '/wishlist': typeof WishlistRoute
+  '/chat/$tailorId': typeof ChatTailorIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
 }
@@ -94,12 +115,15 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
   '/orders': typeof OrdersRouteWithChildren
+  '/premium': typeof PremiumRoute
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
   '/wishlist': typeof WishlistRoute
+  '/chat/$tailorId': typeof ChatTailorIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
 }
@@ -108,12 +132,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
   '/orders': typeof OrdersRouteWithChildren
+  '/premium': typeof PremiumRoute
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
   '/wishlist': typeof WishlistRoute
+  '/chat/$tailorId': typeof ChatTailorIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
 }
@@ -123,12 +150,15 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/chat'
     | '/checkout'
     | '/orders'
+    | '/premium'
     | '/shop'
     | '/splash'
     | '/tailors'
     | '/wishlist'
+    | '/chat/$tailorId'
     | '/orders/$id'
     | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -136,12 +166,15 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/chat'
     | '/checkout'
     | '/orders'
+    | '/premium'
     | '/shop'
     | '/splash'
     | '/tailors'
     | '/wishlist'
+    | '/chat/$tailorId'
     | '/orders/$id'
     | '/product/$id'
   id:
@@ -149,12 +182,15 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/chat'
     | '/checkout'
     | '/orders'
+    | '/premium'
     | '/shop'
     | '/splash'
     | '/tailors'
     | '/wishlist'
+    | '/chat/$tailorId'
     | '/orders/$id'
     | '/product/$id'
   fileRoutesById: FileRoutesById
@@ -163,8 +199,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
   CartRoute: typeof CartRoute
+  ChatRoute: typeof ChatRouteWithChildren
   CheckoutRoute: typeof CheckoutRoute
   OrdersRoute: typeof OrdersRouteWithChildren
+  PremiumRoute: typeof PremiumRoute
   ShopRoute: typeof ShopRoute
   SplashRoute: typeof SplashRoute
   TailorsRoute: typeof TailorsRoute
@@ -202,6 +240,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/premium': {
+      id: '/premium'
+      path: '/premium'
+      fullPath: '/premium'
+      preLoaderRoute: typeof PremiumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/orders': {
       id: '/orders'
       path: '/orders'
@@ -214,6 +259,13 @@ declare module '@tanstack/react-router' {
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -251,8 +303,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrdersIdRouteImport
       parentRoute: typeof OrdersRoute
     }
+    '/chat/$tailorId': {
+      id: '/chat/$tailorId'
+      path: '/$tailorId'
+      fullPath: '/chat/$tailorId'
+      preLoaderRoute: typeof ChatTailorIdRouteImport
+      parentRoute: typeof ChatRoute
+    }
   }
 }
+
+interface ChatRouteChildren {
+  ChatTailorIdRoute: typeof ChatTailorIdRoute
+}
+
+const ChatRouteChildren: ChatRouteChildren = {
+  ChatTailorIdRoute: ChatTailorIdRoute,
+}
+
+const ChatRouteWithChildren = ChatRoute._addFileChildren(ChatRouteChildren)
 
 interface OrdersRouteChildren {
   OrdersIdRoute: typeof OrdersIdRoute
@@ -269,8 +338,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
   CartRoute: CartRoute,
+  ChatRoute: ChatRouteWithChildren,
   CheckoutRoute: CheckoutRoute,
   OrdersRoute: OrdersRouteWithChildren,
+  PremiumRoute: PremiumRoute,
   ShopRoute: ShopRoute,
   SplashRoute: SplashRoute,
   TailorsRoute: TailorsRoute,
@@ -280,3 +351,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

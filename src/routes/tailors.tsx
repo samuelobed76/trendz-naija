@@ -1,8 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { AppShell } from "@/components/layout/AppShell";
 import { TAILORS, NIGERIAN_CITIES, CITY_COORDS, distanceKm, type Tailor } from "@/lib/tailors";
-import { MapPin, Star, MessageCircle, Loader2, Navigation, Scissors } from "lucide-react";
+import { MapPin, Star, MessageCircle, Loader2, Navigation, Scissors, MessagesSquare } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/tailors")({
@@ -200,23 +200,33 @@ function TailorCard({ t }: { t: Tailor & { distance?: number } }) {
             </span>
           ))}
         </div>
-        <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
+        <div className="mt-4 flex items-center justify-between gap-2 border-t border-border pt-3">
           <div className="text-sm">
             <div className="font-semibold">
               from ₦{t.priceFrom.toLocaleString()}
             </div>
             <div className="text-xs text-muted-foreground">{t.turnaround} · {t.reviews} reviews</div>
           </div>
-          <a
-            href={`https://wa.me/${t.whatsapp}?text=${encodeURIComponent(
-              `Hi ${t.name}, I found you on StyleNaija and would love to discuss a piece.`,
-            )}`}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90"
-          >
-            <MessageCircle className="size-3.5" /> Chat
-          </a>
+          <div className="flex items-center gap-1.5">
+            <a
+              href={`https://wa.me/${t.whatsapp}?text=${encodeURIComponent(
+                `Hi ${t.name}, I found you on StyleNaija and would love to discuss a piece.`,
+              )}`}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Chat ${t.name} on WhatsApp`}
+              className="grid size-9 place-items-center rounded-full border border-border hover:bg-muted"
+            >
+              <MessageCircle className="size-4" />
+            </a>
+            <Link
+              to="/chat/$tailorId"
+              params={{ tailorId: t.id }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90"
+            >
+              <MessagesSquare className="size-3.5" /> Message
+            </Link>
+          </div>
         </div>
       </div>
     </li>
