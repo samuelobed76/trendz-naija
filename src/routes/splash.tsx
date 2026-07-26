@@ -3,6 +3,23 @@ import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/splash")({
   component: SplashScreen,
+  head: () => ({
+    meta: [
+      { title: "Welcome to StyleNaija" },
+      {
+        name: "description",
+        content:
+          "StyleNaija is loading — bold Nigerian fashion, tailors near you and confident sizing in one app.",
+      },
+      { property: "og:title", content: "Welcome to StyleNaija" },
+      {
+        property: "og:description",
+        content: "Bold Nigerian fashion, tailors near you and confident sizing in one app.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
 });
 
 const DURATION_MS = 2600;
