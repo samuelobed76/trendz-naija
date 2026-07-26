@@ -13,6 +13,7 @@ import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as TailorsRouteImport } from './routes/tailors'
 import { Route as SplashRouteImport } from './routes/splash'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as PremiumRouteImport } from './routes/premium'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
@@ -39,6 +40,11 @@ const SplashRoute = SplashRouteImport.update({
 const ShopRoute = ShopRouteImport.update({
   id: '/shop',
   path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PremiumRoute = PremiumRouteImport.update({
+  id: '/premium',
+  path: '/premium',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrdersRoute = OrdersRouteImport.update({
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/orders': typeof OrdersRouteWithChildren
+  '/premium': typeof PremiumRoute
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/orders': typeof OrdersRouteWithChildren
+  '/premium': typeof PremiumRoute
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/orders': typeof OrdersRouteWithChildren
+  '/premium': typeof PremiumRoute
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/checkout'
     | '/orders'
+    | '/premium'
     | '/shop'
     | '/splash'
     | '/tailors'
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/checkout'
     | '/orders'
+    | '/premium'
     | '/shop'
     | '/splash'
     | '/tailors'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/checkout'
     | '/orders'
+    | '/premium'
     | '/shop'
     | '/splash'
     | '/tailors'
@@ -165,6 +177,7 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
   OrdersRoute: typeof OrdersRouteWithChildren
+  PremiumRoute: typeof PremiumRoute
   ShopRoute: typeof ShopRoute
   SplashRoute: typeof SplashRoute
   TailorsRoute: typeof TailorsRoute
@@ -200,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/shop'
       fullPath: '/shop'
       preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/premium': {
+      id: '/premium'
+      path: '/premium'
+      fullPath: '/premium'
+      preLoaderRoute: typeof PremiumRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orders': {
@@ -271,6 +291,7 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
   OrdersRoute: OrdersRouteWithChildren,
+  PremiumRoute: PremiumRoute,
   ShopRoute: ShopRoute,
   SplashRoute: SplashRoute,
   TailorsRoute: TailorsRoute,
