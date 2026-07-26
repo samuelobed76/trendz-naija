@@ -16,11 +16,13 @@ import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PremiumRouteImport } from './routes/premium'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ChatRouteImport } from './routes/chat'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 import { Route as OrdersIdRouteImport } from './routes/orders.$id'
+import { Route as ChatTailorIdRouteImport } from './routes/chat.$tailorId'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
@@ -57,6 +59,11 @@ const CheckoutRoute = CheckoutRouteImport.update({
   path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
@@ -82,11 +89,17 @@ const OrdersIdRoute = OrdersIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => OrdersRoute,
 } as any)
+const ChatTailorIdRoute = ChatTailorIdRouteImport.update({
+  id: '/$tailorId',
+  path: '/$tailorId',
+  getParentRoute: () => ChatRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
   '/orders': typeof OrdersRouteWithChildren
   '/premium': typeof PremiumRoute
@@ -94,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
   '/wishlist': typeof WishlistRoute
+  '/chat/$tailorId': typeof ChatTailorIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
 }
@@ -101,6 +115,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
   '/orders': typeof OrdersRouteWithChildren
   '/premium': typeof PremiumRoute
@@ -108,6 +123,7 @@ export interface FileRoutesByTo {
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
   '/wishlist': typeof WishlistRoute
+  '/chat/$tailorId': typeof ChatTailorIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
 }
@@ -116,6 +132,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/cart': typeof CartRoute
+  '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
   '/orders': typeof OrdersRouteWithChildren
   '/premium': typeof PremiumRoute
@@ -123,6 +140,7 @@ export interface FileRoutesById {
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
   '/wishlist': typeof WishlistRoute
+  '/chat/$tailorId': typeof ChatTailorIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
 }
@@ -132,6 +150,7 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/chat'
     | '/checkout'
     | '/orders'
     | '/premium'
@@ -139,6 +158,7 @@ export interface FileRouteTypes {
     | '/splash'
     | '/tailors'
     | '/wishlist'
+    | '/chat/$tailorId'
     | '/orders/$id'
     | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -146,6 +166,7 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/chat'
     | '/checkout'
     | '/orders'
     | '/premium'
@@ -153,6 +174,7 @@ export interface FileRouteTypes {
     | '/splash'
     | '/tailors'
     | '/wishlist'
+    | '/chat/$tailorId'
     | '/orders/$id'
     | '/product/$id'
   id:
@@ -160,6 +182,7 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/cart'
+    | '/chat'
     | '/checkout'
     | '/orders'
     | '/premium'
@@ -167,6 +190,7 @@ export interface FileRouteTypes {
     | '/splash'
     | '/tailors'
     | '/wishlist'
+    | '/chat/$tailorId'
     | '/orders/$id'
     | '/product/$id'
   fileRoutesById: FileRoutesById
@@ -175,6 +199,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
   CartRoute: typeof CartRoute
+  ChatRoute: typeof ChatRouteWithChildren
   CheckoutRoute: typeof CheckoutRoute
   OrdersRoute: typeof OrdersRouteWithChildren
   PremiumRoute: typeof PremiumRoute
@@ -236,6 +261,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cart': {
       id: '/cart'
       path: '/cart'
@@ -271,8 +303,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrdersIdRouteImport
       parentRoute: typeof OrdersRoute
     }
+    '/chat/$tailorId': {
+      id: '/chat/$tailorId'
+      path: '/$tailorId'
+      fullPath: '/chat/$tailorId'
+      preLoaderRoute: typeof ChatTailorIdRouteImport
+      parentRoute: typeof ChatRoute
+    }
   }
 }
+
+interface ChatRouteChildren {
+  ChatTailorIdRoute: typeof ChatTailorIdRoute
+}
+
+const ChatRouteChildren: ChatRouteChildren = {
+  ChatTailorIdRoute: ChatTailorIdRoute,
+}
+
+const ChatRouteWithChildren = ChatRoute._addFileChildren(ChatRouteChildren)
 
 interface OrdersRouteChildren {
   OrdersIdRoute: typeof OrdersIdRoute
@@ -289,6 +338,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
   CartRoute: CartRoute,
+  ChatRoute: ChatRouteWithChildren,
   CheckoutRoute: CheckoutRoute,
   OrdersRoute: OrdersRouteWithChildren,
   PremiumRoute: PremiumRoute,

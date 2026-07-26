@@ -1,9 +1,33 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Heart, Home, Menu, Scissors, Search, ShoppingBag, User, X } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import {
+  Crown,
+  Heart,
+  Home,
+  Menu,
+  MessagesSquare,
+  Scissors,
+  Search,
+  ShoppingBag,
+  User,
+  X,
+} from "lucide-react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useStore } from "@/lib/store";
 import { CATEGORIES } from "@/lib/products";
+import { usePremium } from "@/lib/premium";
+import { totalUnread } from "@/lib/chat";
 import { cn } from "@/lib/utils";
+
+function useUnread() {
+  const [unread, setUnread] = useState(0);
+  useEffect(() => {
+    const sync = () => setUnread(totalUnread());
+    sync();
+    window.addEventListener("stylenaija:chats", sync);
+    return () => window.removeEventListener("stylenaija:chats", sync);
+  }, []);
+  return unread;
+}
 
 export function AppShell({ children }: { children: ReactNode }) {
   return (
@@ -18,6 +42,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
 function Header() {
   const { cartCount, wishlist } = useStore();
+  const { membership } = usePremium();
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
@@ -47,6 +72,15 @@ function Header() {
           <Link to="/tailors" className="hover:text-primary transition-colors">
             Tailors
           </Link>
+          <Link to="/chat" className="hover:text-primary transition-colors">
+            Messages
+          </Link>
+          <Link
+            to="/premium"
+            className="inline-flex items-center gap-1 text-primary hover:opacity-80 transition-opacity"
+          >
+            <Crown className="size-4" /> Prime
+          </Link>
           {CATEGORIES.slice(0, 4).map((c) => (
             <Link
               key={c}
@@ -59,6 +93,11 @@ function Header() {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-1">
+          {membership.active && (
+            <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-accent/50 px-2.5 py-1 text-[11px] font-bold text-accent-foreground">
+              <Crown className="size-3" /> Prime
+            </span>
+          )}
           <Link
             to="/shop"
             className="hidden sm:grid size-10 place-items-center rounded-full hover:bg-muted"
@@ -111,6 +150,12 @@ function Header() {
             <Link to="/tailors" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
               Find tailors
             </Link>
+            <Link to="/chat" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+              Messages
+            </Link>
+            <Link to="/premium" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 font-semibold text-primary hover:bg-muted">
+              StyleNaija Prime
+            </Link>
             <Link to="/orders" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
               My orders
             </Link>
@@ -137,12 +182,12 @@ function Header() {
 
 function BottomNav() {
   const path = useRouterState({ select: (s) => s.location.pathname });
-  const { cartCount } = useStore();
+  const unread = useUnread();
   const items = [
     { to: "/", label: "Home", icon: Home },
     { to: "/shop", label: "Shop", icon: Search },
     { to: "/tailors", label: "Tailors", icon: Scissors },
-    { to: "/cart", label: "Cart", icon: ShoppingBag, badge: cartCount },
+    { to: "/chat", label: "Chat", icon: MessagesSquare, badge: unread },
     { to: "/account", label: "Me", icon: User },
   ] as const;
   return (
