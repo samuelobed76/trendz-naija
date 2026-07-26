@@ -9,6 +9,24 @@ import lifestyle2 from "@/assets/lifestyle2.jpg";
 
 export const Route = createFileRoute("/")({
   component: Home,
+  head: () => ({
+    meta: [
+      { title: "StyleNaija — Nigerian Fashion, Sized For You" },
+      {
+        name: "description",
+        content:
+          "Shop ankara, kaftans, agbada, shoes and loungewear with accurate Nigerian sizing, find tailors near you, chat designers and track every order.",
+      },
+      { property: "og:title", content: "StyleNaija — Nigerian Fashion, Sized For You" },
+      {
+        property: "og:description",
+        content:
+          "Bold Afro-modern fashion, vetted tailors near you, in-app designer chat and Prime membership perks.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
 });
 
 function Home() {
