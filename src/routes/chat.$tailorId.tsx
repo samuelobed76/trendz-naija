@@ -1,9 +1,17 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, Crown, MapPin, Send, Star, MessageCircle } from "lucide-react";
+import { ArrowLeft, Bell, Crown, MapPin, Send, Star, MessageCircle } from "lucide-react";
+import { toast } from "sonner";
 import { AppShell } from "@/components/layout/AppShell";
-import { QUICK_PROMPTS, getTailor, startConversation, useChat } from "@/lib/chat";
+import {
+  QUICK_PROMPTS,
+  chatNotificationsEnabled,
+  getTailor,
+  requestChatNotifications,
+  useChat,
+} from "@/lib/chat";
 import { usePremium } from "@/lib/premium";
+import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/chat/$tailorId")({
   component: ChatThread,
@@ -36,23 +44,52 @@ export const Route = createFileRoute("/chat/$tailorId")({
 function ChatThread() {
   const { tailor } = Route.useLoaderData();
   const { membership } = usePremium();
-  const { convo, typing, send } = useChat(tailor.id, membership.active);
+  const { user, loading } = useAuth();
+  const { messages, typing, send } = useChat(tailor.id, membership.active);
   const [text, setText] = useState("");
+  const [notify, setNotify] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    startConversation(tailor.id);
-  }, [tailor.id]);
+    setNotify(chatNotificationsEnabled());
+  }, []);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [convo.messages.length, typing]);
+  }, [messages.length, typing]);
 
   const onSend = (e: React.FormEvent) => {
     e.preventDefault();
     send(text);
     setText("");
   };
+
+  const toggleNotify = async () => {
+    const ok = await requestChatNotifications();
+    setNotify(ok);
+    toast[ok ? "success" : "error"](
+      ok ? "Chat notifications on" : "Notifications blocked in your browser",
+    );
+  };
+
+  if (!loading && !user) {
+    return (
+      <AppShell>
+        <div className="mx-auto max-w-md px-4 py-16 text-center">
+          <p className="font-display text-2xl font-black">Sign in to chat</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Create a free account to message {tailor.name} in real time.
+          </p>
+          <Link
+            to="/auth"
+            className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground"
+          >
+            Sign in / Create account
+          </Link>
+        </div>
+      </AppShell>
+    );
+  }
 
   return (
     <AppShell>
@@ -78,6 +115,13 @@ function ChatThread() {
               </span>
             </p>
           </div>
+          <button
+            onClick={toggleNotify}
+            aria-label="Toggle chat notifications"
+            className={`rounded-full border border-border p-2 hover:bg-muted ${notify ? "text-primary" : ""}`}
+          >
+            <Bell className="size-4" />
+          </button>
           <a
             href={`https://wa.me/${tailor.whatsapp}`}
             target="_blank"
@@ -104,7 +148,7 @@ function ChatThread() {
 
         {/* Messages */}
         <div className="mt-3 min-h-[45vh] space-y-3 rounded-2xl bg-muted/40 p-3">
-          {convo.messages.map((m) => (
+          {messages.map((m) => (
             <div
               key={m.id}
               className={`flex ${m.from === "me" ? "justify-end" : "justify-start"}`}

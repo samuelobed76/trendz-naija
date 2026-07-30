@@ -1,10 +1,9 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { MessagesSquare, ChevronRight, Crown } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
-import { loadConversations, type Conversation } from "@/lib/chat";
-import type { Tailor } from "@/lib/tailors";
+import { useConversations } from "@/lib/chat";
 import { usePremium } from "@/lib/premium";
+import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/chat")({
   component: ChatLayout,
@@ -34,15 +33,9 @@ function ChatLayout() {
 }
 
 function ChatList() {
-  const [convos, setConvos] = useState<(Conversation & { tailor: Tailor | undefined })[]>([]);
   const { membership } = usePremium();
-
-  useEffect(() => {
-    const sync = () => setConvos(loadConversations());
-    sync();
-    window.addEventListener("stylenaija:chats", sync);
-    return () => window.removeEventListener("stylenaija:chats", sync);
-  }, []);
+  const { user, loading: authLoading } = useAuth();
+  const { items: convos, loading } = useConversations();
 
   return (
     <AppShell>
@@ -61,7 +54,23 @@ function ChatList() {
           )}
         </div>
 
-        {convos.length === 0 ? (
+        {!authLoading && !user ? (
+          <div className="mt-10 rounded-2xl border border-dashed border-border bg-card p-10 text-center">
+            <MessagesSquare className="mx-auto size-10 text-muted-foreground" />
+            <p className="mt-4 font-display text-xl font-black">Sign in to see your messages</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Your chats sync live across every device once you're signed in.
+            </p>
+            <Link
+              to="/auth"
+              className="mt-6 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+            >
+              Sign in / Create account
+            </Link>
+          </div>
+        ) : loading ? (
+          <p className="mt-10 text-center text-sm text-muted-foreground">Loading your chats…</p>
+        ) : convos.length === 0 ? (
           <div className="mt-10 rounded-2xl border border-dashed border-border bg-card p-10 text-center">
             <MessagesSquare className="mx-auto size-10 text-muted-foreground" />
             <p className="mt-4 font-display text-xl font-black">No chats yet</p>
@@ -78,9 +87,9 @@ function ChatList() {
         ) : (
           <ul className="mt-6 space-y-3">
             {convos.map((c) => {
-              const last = c.messages[c.messages.length - 1];
+              const last = c.last;
               return (
-                <li key={c.tailorId}>
+                <li key={c.id}>
                   <Link
                     to="/chat/$tailorId"
                     params={{ tailorId: c.tailorId }}
