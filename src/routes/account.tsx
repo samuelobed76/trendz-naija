@@ -1,6 +1,8 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Bell, Crown, Heart, LogIn, MapPin, MessagesSquare, Package, Ruler, User } from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { Bell, Crown, Heart, LogIn, LogOut, MapPin, MessagesSquare, Package, Ruler, User } from "lucide-react";
+import { toast } from "sonner";
 import { AppShell } from "@/components/layout/AppShell";
+import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/account")({
   component: AccountPage,
@@ -8,6 +10,17 @@ export const Route = createFileRoute("/account")({
 });
 
 function AccountPage() {
+  const { user, loading, signOut } = useAuth();
+  const navigate = useNavigate();
+  const name =
+    (user?.user_metadata?.full_name as string | undefined) || user?.email?.split("@")[0] || "";
+
+  const onSignOut = async () => {
+    await signOut();
+    toast("Signed out", { description: "See you soon 👋" });
+    navigate({ to: "/", replace: true });
+  };
+
   return (
     <AppShell>
       <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
@@ -17,19 +30,44 @@ function AccountPage() {
               <User className="size-7" />
             </div>
             <div className="min-w-0">
-              <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Welcome</p>
-              <h1 className="font-display text-2xl font-black md:text-3xl">Sign in to StyleNaija</h1>
-              <p className="text-sm opacity-90">Save your sizes, addresses and reorder in seconds.</p>
+              <p className="text-xs font-semibold uppercase tracking-widest opacity-80">
+                {user ? "Signed in" : "Welcome"}
+              </p>
+              <h1 className="truncate font-display text-2xl font-black md:text-3xl">
+                {user ? `Hey, ${name}` : "Sign in to StyleNaija"}
+              </h1>
+              <p className="truncate text-sm opacity-90">
+                {user ? user.email : "Save your sizes, addresses and reorder in seconds."}
+              </p>
             </div>
           </div>
-          <div className="mt-5 flex flex-wrap gap-2">
-            <button className="inline-flex items-center gap-2 rounded-full bg-background px-5 py-2.5 text-sm font-semibold text-foreground">
-              <LogIn className="size-4" /> Sign in
-            </button>
-            <button className="inline-flex items-center gap-2 rounded-full border border-background/60 px-5 py-2.5 text-sm font-semibold">
-              Create account
-            </button>
-          </div>
+          {!loading && (
+            <div className="mt-5 flex flex-wrap gap-2">
+              {user ? (
+                <button
+                  onClick={onSignOut}
+                  className="inline-flex items-center gap-2 rounded-full bg-background px-5 py-2.5 text-sm font-semibold text-foreground"
+                >
+                  <LogOut className="size-4" /> Sign out
+                </button>
+              ) : (
+                <>
+                  <Link
+                    to="/auth"
+                    className="inline-flex items-center gap-2 rounded-full bg-background px-5 py-2.5 text-sm font-semibold text-foreground"
+                  >
+                    <LogIn className="size-4" /> Sign in
+                  </Link>
+                  <Link
+                    to="/auth"
+                    className="inline-flex items-center gap-2 rounded-full border border-background/60 px-5 py-2.5 text-sm font-semibold"
+                  >
+                    Create account
+                  </Link>
+                </>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
