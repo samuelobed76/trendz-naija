@@ -11,23 +11,12 @@ import {
   User,
   X,
 } from "lucide-react";
-import { useEffect, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { useStore } from "@/lib/store";
 import { CATEGORIES } from "@/lib/products";
 import { usePremium } from "@/lib/premium";
-import { totalUnread } from "@/lib/chat";
+import { useUnreadCount } from "@/lib/chat";
 import { cn } from "@/lib/utils";
-
-function useUnread() {
-  const [unread, setUnread] = useState(0);
-  useEffect(() => {
-    const sync = () => setUnread(totalUnread());
-    sync();
-    window.addEventListener("stylenaija:chats", sync);
-    return () => window.removeEventListener("stylenaija:chats", sync);
-  }, []);
-  return unread;
-}
 
 export function AppShell({ children }: { children: ReactNode }) {
   return (
@@ -182,7 +171,7 @@ function Header() {
 
 function BottomNav() {
   const path = useRouterState({ select: (s) => s.location.pathname });
-  const unread = useUnread();
+  const unread = useUnreadCount();
   const items = [
     { to: "/", label: "Home", icon: Home },
     { to: "/shop", label: "Shop", icon: Search },
