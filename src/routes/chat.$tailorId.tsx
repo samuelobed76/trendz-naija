@@ -148,7 +148,7 @@ function ChatThread() {
 
         {/* Messages */}
         <div className="mt-3 min-h-[45vh] space-y-3 rounded-2xl bg-muted/40 p-3">
-          {convo.messages.map((m) => (
+          {messages.map((m) => (
             <div
               key={m.id}
               className={`flex ${m.from === "me" ? "justify-end" : "justify-start"}`}
