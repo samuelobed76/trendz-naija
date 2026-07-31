@@ -4,8 +4,23 @@ import p3 from "@/assets/p3.jpg";
 import p4 from "@/assets/p4.jpg";
 import p5 from "@/assets/p5.jpg";
 import p6 from "@/assets/p6.jpg";
+import p7 from "@/assets/p7.jpg";
+import p8 from "@/assets/p8.jpg";
+import p9 from "@/assets/p9.jpg";
+import p10 from "@/assets/p10.jpg";
+import p11 from "@/assets/p11.jpg";
+import p12 from "@/assets/p12.jpg";
 
-export type Category = "Women" | "Men" | "Kids" | "Shoes" | "House Wears" | "Suits" | "Accessories";
+export type Category =
+  | "Women"
+  | "Men"
+  | "Kids"
+  | "Shoes"
+  | "House Wears"
+  | "Suits"
+  | "Natives"
+  | "Streetwear"
+  | "Accessories";
 
 export interface Product {
   id: string;
@@ -36,6 +51,8 @@ export const CATEGORIES: Category[] = [
   "Shoes",
   "House Wears",
   "Suits",
+  "Natives",
+  "Streetwear",
   "Accessories",
 ];
 
