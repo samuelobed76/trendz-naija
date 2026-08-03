@@ -59,6 +59,14 @@ function Shop() {
     return out;
   }, [selectedCat, query, priceMax, sort]);
 
+  const grouped = useMemo(() => {
+    if (selectedCat !== "All") return null;
+    return CATEGORIES.map((c) => ({
+      category: c,
+      items: filtered.filter((p) => p.category === c),
+    })).filter((g) => g.items.length > 0);
+  }, [filtered, selectedCat]);
+
   return (
     <AppShell>
       <div className="mx-auto max-w-7xl px-4 py-6 md:py-10">
@@ -168,11 +176,39 @@ function Shop() {
                 <p className="text-sm text-muted-foreground">Try widening your filters.</p>
               </div>
             ) : (
+              grouped ? (
+                <div className="space-y-10">
+                  {grouped.map((g) => (
+                    <section key={g.category} aria-labelledby={`cat-${g.category}`}>
+                      <div className="mb-3 flex items-baseline justify-between gap-3 border-b border-border pb-2">
+                        <h2
+                          id={`cat-${g.category}`}
+                          className="font-display text-xl font-black md:text-2xl"
+                        >
+                          {g.category}
+                        </h2>
+                        <button
+                          onClick={() => setSelectedCat(g.category)}
+                          className="text-xs font-semibold uppercase tracking-wider text-primary hover:underline"
+                        >
+                          {g.items.length} items · view all
+                        </button>
+                      </div>
+                      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                        {g.items.map((p) => (
+                          <ProductCard key={p.id} product={p} />
+                        ))}
+                      </div>
+                    </section>
+                  ))}
+                </div>
+              ) : (
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {filtered.map((p) => (
                   <ProductCard key={p.id} product={p} />
                 ))}
               </div>
+              )
             )}
           </div>
         </div>
