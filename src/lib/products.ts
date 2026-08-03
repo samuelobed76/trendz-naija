@@ -14,6 +14,7 @@ import p12 from "@/assets/p12.jpg";
 export type Category =
   | "Women"
   | "Men"
+  | "Teens"
   | "Kids"
   | "Shoes"
   | "House Wears"
@@ -47,6 +48,7 @@ export interface Product {
 export const CATEGORIES: Category[] = [
   "Women",
   "Men",
+  "Teens",
   "Kids",
   "Shoes",
   "House Wears",
