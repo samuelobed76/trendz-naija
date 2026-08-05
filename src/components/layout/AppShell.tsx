@@ -1,20 +1,18 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   Crown,
-  Heart,
   Home,
+  LayoutDashboard,
   Menu,
   MessagesSquare,
+  Package,
+  Ruler,
   Scissors,
-  Search,
-  ShoppingBag,
   User,
+  Users,
   X,
 } from "lucide-react";
 import { useState, type ReactNode } from "react";
-import { useStore } from "@/lib/store";
-import { CATEGORIES } from "@/lib/products";
-import { usePremium } from "@/lib/premium";
 import { useUnreadCount } from "@/lib/chat";
 import { cn } from "@/lib/utils";
 
@@ -30,11 +28,9 @@ export function AppShell({ children }: { children: ReactNode }) {
 }
 
 function Header() {
-  const { cartCount, wishlist } = useStore();
-  const { membership } = usePremium();
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4">
         <button
           className="md:hidden -ml-2 rounded-md p-2 text-foreground/80 hover:bg-muted"
@@ -44,80 +40,34 @@ function Header() {
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
         <Link to="/" className="flex items-center gap-2">
-          <span className="grid size-8 place-items-center rounded-full gradient-warm text-primary-foreground font-display font-black">
+          <span className="grid size-8 place-items-center rounded-full gradient-emerald text-primary-foreground font-display font-black">
             S
           </span>
           <span className="font-display text-xl font-black tracking-tight">
-            Style<span className="text-primary">Naija</span>
+            Stitch<span className="text-emerald">Naija</span>
           </span>
         </Link>
         <nav className="hidden md:flex ml-6 items-center gap-6 text-sm font-medium">
-          <Link to="/" className="hover:text-primary transition-colors">
+          <Link to="/" className="hover:text-emerald transition-colors">
             Home
           </Link>
-          <Link to="/shop" className="hover:text-primary transition-colors">
-            Shop
+          <Link to="/dashboard" className="hover:text-emerald transition-colors">
+            Dashboard
           </Link>
-          <Link to="/tailors" className="hover:text-primary transition-colors">
-            Tailors
+          <Link to="/portfolio" className="hover:text-emerald transition-colors">
+            Portfolio
           </Link>
-          <Link to="/chat" className="hover:text-primary transition-colors">
+          <Link to="/orders" className="hover:text-emerald transition-colors">
+            Orders
+          </Link>
+          <Link to="/clients" className="hover:text-emerald transition-colors">
+            Clients
+          </Link>
+          <Link to="/chat" className="hover:text-emerald transition-colors">
             Messages
           </Link>
-          <Link
-            to="/premium"
-            className="inline-flex items-center gap-1 text-primary hover:opacity-80 transition-opacity"
-          >
-            <Crown className="size-4" /> Prime
-          </Link>
-          {CATEGORIES.slice(0, 4).map((c) => (
-            <Link
-              key={c}
-              to="/shop"
-              search={{ category: c } as never}
-              className="hover:text-primary transition-colors"
-            >
-              {c}
-            </Link>
-          ))}
         </nav>
         <div className="ml-auto flex items-center gap-1">
-          {membership.active && (
-            <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-accent/50 px-2.5 py-1 text-[11px] font-bold text-accent-foreground">
-              <Crown className="size-3" /> Prime
-            </span>
-          )}
-          <Link
-            to="/shop"
-            className="hidden sm:grid size-10 place-items-center rounded-full hover:bg-muted"
-            aria-label="Search"
-          >
-            <Search className="size-5" />
-          </Link>
-          <Link
-            to="/wishlist"
-            className="relative grid size-10 place-items-center rounded-full hover:bg-muted"
-            aria-label="Wishlist"
-          >
-            <Heart className="size-5" />
-            {wishlist.length > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 grid size-5 place-items-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold">
-                {wishlist.length}
-              </span>
-            )}
-          </Link>
-          <Link
-            to="/cart"
-            className="relative grid size-10 place-items-center rounded-full hover:bg-muted"
-            aria-label="Cart"
-          >
-            <ShoppingBag className="size-5" />
-            {cartCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 grid size-5 place-items-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold">
-                {cartCount}
-              </span>
-            )}
-          </Link>
           <Link
             to="/account"
             className="hidden sm:grid size-10 place-items-center rounded-full hover:bg-muted"
@@ -133,32 +83,24 @@ function Header() {
             <Link to="/" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
               Home
             </Link>
-            <Link to="/shop" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
-              Shop all
+            <Link to="/dashboard" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+              Dashboard
             </Link>
-            <Link to="/tailors" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
-              Find tailors
+            <Link to="/portfolio" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+              Portfolio
+            </Link>
+            <Link to="/orders" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+              Orders
+            </Link>
+            <Link to="/clients" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+              Clients
+            </Link>
+            <Link to="/measurements" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+              Measurements
             </Link>
             <Link to="/chat" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
               Messages
             </Link>
-            <Link to="/premium" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 font-semibold text-primary hover:bg-muted">
-              StyleNaija Prime
-            </Link>
-            <Link to="/orders" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
-              My orders
-            </Link>
-            {CATEGORIES.map((c) => (
-              <Link
-                key={c}
-                to="/shop"
-                search={{ category: c } as never}
-                onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-2 hover:bg-muted"
-              >
-                {c}
-              </Link>
-            ))}
             <Link to="/account" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
               Account
             </Link>
@@ -174,8 +116,8 @@ function BottomNav() {
   const unread = useUnreadCount();
   const items = [
     { to: "/", label: "Home", icon: Home },
-    { to: "/shop", label: "Shop", icon: Search },
-    { to: "/tailors", label: "Tailors", icon: Scissors },
+    { to: "/dashboard", label: "Studio", icon: LayoutDashboard },
+    { to: "/portfolio", label: "Work", icon: Scissors },
     { to: "/chat", label: "Chat", icon: MessagesSquare, badge: unread },
     { to: "/account", label: "Me", icon: User },
   ] as const;
@@ -191,13 +133,13 @@ function BottomNav() {
                 to={it.to}
                 className={cn(
                   "flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium relative",
-                  active ? "text-primary" : "text-muted-foreground",
+                  active ? "text-emerald" : "text-muted-foreground",
                 )}
               >
                 <span className="relative">
                   <Icon className="size-5" />
                   {"badge" in it && it.badge && it.badge > 0 ? (
-                    <span className="absolute -top-1 -right-2 grid size-4 place-items-center rounded-full bg-primary text-primary-foreground text-[9px] font-bold">
+                    <span className="absolute -top-1 -right-2 grid size-4 place-items-center rounded-full bg-emerald text-primary-foreground text-[9px] font-bold">
                       {it.badge}
                     </span>
                   ) : null}
@@ -218,23 +160,23 @@ function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="grid size-8 place-items-center rounded-full gradient-warm text-primary-foreground font-display font-black">
+            <span className="grid size-8 place-items-center rounded-full gradient-emerald text-primary-foreground font-display font-black">
               S
             </span>
             <span className="font-display text-xl font-black">
-              Style<span className="text-primary">Naija</span>
+              Stitch<span className="text-emerald">Naija</span>
             </span>
           </div>
           <p className="mt-3 text-sm text-muted-foreground max-w-xs">
-            Confident fashion made for Nigerian bodies, occasions, and weather.
+            The workspace for Nigerian tailors and fashion designers to manage clients, orders and craft.
           </p>
         </div>
-        <FooterCol title="Shop" links={["Women", "Men", "Kids", "Shoes", "House Wears", "Suits"]} />
-        <FooterCol title="Help" links={["Size guide", "Shipping", "Returns", "Track order", "WhatsApp support"]} />
-        <FooterCol title="Company" links={["About", "Journal", "Sustainability", "Careers"]} />
+        <FooterCol title="Studio" links={["Dashboard", "Portfolio", "Orders", "Clients"]} />
+        <FooterCol title="Grow" links={["Prime membership", "Reviews", "Measurements", "Chat"]} />
+        <FooterCol title="Company" links={["About", "Journal", "Support", "Careers"]} />
       </div>
       <div className="border-t border-border py-4 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} StyleNaija. Made in Lagos.
+        © {new Date().getFullYear()} StitchNaija. Made in Lagos.
       </div>
     </footer>
   );
