@@ -210,7 +210,7 @@ function TailorCard({ t }: { t: Tailor & { distance?: number } }) {
           <div className="flex items-center gap-1.5">
             <a
               href={`https://wa.me/${t.whatsapp}?text=${encodeURIComponent(
-                `Hi ${t.name}, I found you on StyleNaija and would love to discuss a piece.`,
+                `Hi ${t.name}, I found you on StitchNaija and would love to discuss a piece.`,
               )}`}
               target="_blank"
               rel="noreferrer"
