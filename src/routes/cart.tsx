@@ -6,7 +6,7 @@ import { useStore } from "@/lib/store";
 
 export const Route = createFileRoute("/cart")({
   component: CartPage,
-  head: () => ({ meta: [{ title: "Your bag — StyleNaija" }] }),
+  head: () => ({ meta: [{ title: "Your bag — StitchNaija" }] }),
 });
 
 function CartPage() {

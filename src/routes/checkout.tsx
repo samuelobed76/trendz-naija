@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/checkout")({
   component: Checkout,
-  head: () => ({ meta: [{ title: "Checkout — StyleNaija" }] }),
+  head: () => ({ meta: [{ title: "Checkout — StitchNaija" }] }),
 });
 
 type Pay = "card" | "transfer" | "cod";

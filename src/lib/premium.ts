@@ -44,7 +44,7 @@ export const PREMIUM_PERKS = [
   },
   {
     title: "Free personal styling",
-    desc: "Monthly 1-on-1 session with a StyleNaija stylist.",
+    desc: "Monthly 1-on-1 session with a StitchNaija stylist.",
   },
   {
     title: "Prime pricing",

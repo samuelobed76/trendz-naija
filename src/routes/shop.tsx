@@ -17,8 +17,8 @@ export const Route = createFileRoute("/shop")({
   component: Shop,
   head: () => ({
     meta: [
-      { title: "Shop — StyleNaija" },
-      { name: "description", content: "Browse Nigerian fashion by category, size, color and occasion." },
+      { title: "Shop — StitchNaija" },
+      { name: "description", content: "Browse fabrics, ready-to-wear and accessories for your clients." },
     ],
   }),
 });

@@ -17,12 +17,12 @@ export const Route = createFileRoute("/product/$id")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.product.name} — StyleNaija` },
+          { title: `${loaderData.product.name} — StitchNaija` },
           { name: "description", content: loaderData.product.description },
-          { property: "og:title", content: `${loaderData.product.name} — StyleNaija` },
+          { property: "og:title", content: `${loaderData.product.name} — StitchNaija` },
           { property: "og:description", content: loaderData.product.description },
         ]
-      : [{ title: "Product — StyleNaija" }],
+      : [{ title: "Product — StitchNaija" }],
   }),
   component: ProductPage,
   notFoundComponent: () => (
