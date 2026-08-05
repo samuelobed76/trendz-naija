@@ -8,13 +8,13 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/tailors")({
   head: () => ({
     meta: [
-      { title: "Find Tailors & Designers Near You — StyleNaija" },
+      { title: "Find Tailors & Designers Near You — StitchNaija" },
       {
         name: "description",
         content:
           "Discover trusted Nigerian tailors and fashion designers close to you. Filter by specialty, city and distance, then message on WhatsApp.",
       },
-      { property: "og:title", content: "Find Tailors & Designers Near You — StyleNaija" },
+      { property: "og:title", content: "Find Tailors & Designers Near You — StitchNaija" },
       {
         property: "og:description",
         content:
@@ -77,7 +77,7 @@ function TailorsPage() {
   return (
     <AppShell>
       {/* Hero */}
-      <section className="gradient-warm text-primary-foreground">
+      <section className="gradient-emerald text-primary-foreground">
         <div className="mx-auto max-w-7xl px-4 py-10 md:py-16">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
             <Scissors className="size-3.5" /> Bespoke & Local
