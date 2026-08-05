@@ -33,7 +33,16 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/orders/$id")({
   component: TrackOrder,
-  head: () => ({ meta: [{ title: "Track your order — StyleNaija" }] }),
+  head: () => ({
+    meta: [
+      { title: "Track order — StitchNaija" },
+      { name: "description", content: "Track a client order through the StitchNaija studio pipeline." },
+      { property: "og:title", content: "Track order — StitchNaija" },
+      { property: "og:description", content: "Live order status from received to delivered." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
 });
 
 const STAGE_ICONS: Record<OrderStatus, LucideIcon> = {
@@ -51,7 +60,6 @@ function TrackOrder() {
   const [prefs, setPrefs] = useNotifPrefs();
   const lastStageRef = useRef<number>(order ? computeStageIndex(order) : -1);
 
-  // Refresh order + ticking clock so the timeline auto-progresses
   useEffect(() => {
     if (!order) return;
     const t = setInterval(() => {
@@ -61,7 +69,6 @@ function TrackOrder() {
     return () => clearInterval(t);
   }, [id, order]);
 
-  // Fire push notifications when the stage advances
   useEffect(() => {
     if (!order) return;
     const stage = computeStageIndex(order, now);
@@ -83,7 +90,7 @@ function TrackOrder() {
           </p>
           <Link
             to="/orders"
-            className="mt-6 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+            className="mt-6 inline-flex rounded-full bg-emerald px-5 py-2.5 text-sm font-semibold text-primary-foreground"
           >
             See all orders
           </Link>
@@ -123,7 +130,7 @@ function TrackOrder() {
   };
 
   const step = STATUS_STEPS[stage];
-  const waMessage = `Hi StyleNaija 👋 checking on my order ${order.id} (status: ${step.label}). Tracking: ${order.courier.trackingCode}`;
+  const waMessage = `Hi 👋 checking on order ${order.id} (status: ${step.label}). Tracking: ${order.courier.trackingCode}`;
   const waHref = buildWhatsAppLink(prefs.whatsappNumber || "2348000000000", waMessage);
 
   return (
@@ -138,7 +145,7 @@ function TrackOrder() {
 
         <header className="mt-3 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+            <p className="text-xs font-semibold uppercase tracking-widest text-emerald">
               Order {order.id}
             </p>
             <h1 className="font-display text-3xl font-black md:text-4xl">{step.label}</h1>
@@ -146,7 +153,7 @@ function TrackOrder() {
               {order.courier.name} · Tracking {order.courier.trackingCode}
             </p>
           </div>
-          <div className="rounded-2xl bg-accent/30 px-4 py-3 text-right">
+          <div className="rounded-2xl bg-gold/20 px-4 py-3 text-right">
             <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
               Estimated delivery
             </p>
@@ -172,7 +179,7 @@ function TrackOrder() {
               <ol className="relative mt-6">
                 <div className="absolute left-4 top-2 bottom-2 w-px bg-border" aria-hidden />
                 <div
-                  className="absolute left-4 top-2 w-px bg-primary transition-all"
+                  className="absolute left-4 top-2 w-px bg-emerald transition-all"
                   style={{ height: `calc(${(stage / 3) * 100}% - 8px)` }}
                   aria-hidden
                 />
@@ -187,9 +194,9 @@ function TrackOrder() {
                         className={cn(
                           "grid size-9 shrink-0 place-items-center rounded-full border-2 transition",
                           done
-                            ? "border-primary bg-primary text-primary-foreground"
+                            ? "border-emerald bg-emerald text-primary-foreground"
                             : "border-border bg-background text-muted-foreground",
-                          active && "ring-4 ring-primary/20",
+                          active && "ring-4 ring-emerald/20",
                         )}
                       >
                         <Icon className="size-4" />
@@ -198,7 +205,7 @@ function TrackOrder() {
                         <p className={cn("font-semibold", !done && "text-muted-foreground")}>
                           {s.label}
                           {active && (
-                            <span className="ml-2 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+                            <span className="ml-2 rounded-full bg-emerald/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald">
                               Now
                             </span>
                           )}
@@ -222,7 +229,7 @@ function TrackOrder() {
               {stage < 3 && (
                 <button
                   onClick={onAdvance}
-                  className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
+                  className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-emerald hover:underline"
                 >
                   Simulate next update <ChevronRight className="size-3" />
                 </button>
@@ -265,7 +272,7 @@ function TrackOrder() {
             <div className="rounded-2xl border border-border bg-card p-5">
               <h2 className="font-display text-lg font-black">Stay updated</h2>
               <p className="mt-1 text-xs text-muted-foreground">
-                Get pinged the moment your order moves.
+                Get pinged the moment this order moves.
               </p>
 
               <button
@@ -273,14 +280,14 @@ function TrackOrder() {
                 className={cn(
                   "mt-4 flex w-full items-center gap-3 rounded-xl border p-3 text-left transition",
                   prefs.push
-                    ? "border-primary bg-primary/5"
-                    : "border-border hover:border-primary/60",
+                    ? "border-emerald bg-emerald/5"
+                    : "border-border hover:border-emerald/60",
                 )}
               >
                 <span
                   className={cn(
                     "grid size-9 place-items-center rounded-full",
-                    prefs.push ? "bg-primary text-primary-foreground" : "bg-muted",
+                    prefs.push ? "bg-emerald text-primary-foreground" : "bg-muted",
                   )}
                 >
                   {prefs.push ? <Bell className="size-4" /> : <BellOff className="size-4" />}
@@ -299,7 +306,7 @@ function TrackOrder() {
                     type="checkbox"
                     checked={prefs.whatsapp}
                     onChange={(e) => setPrefs({ whatsapp: e.target.checked })}
-                    className="size-4 accent-primary"
+                    className="size-4 accent-emerald"
                   />
                   <span className="text-sm font-semibold">WhatsApp updates</span>
                 </label>
@@ -309,7 +316,7 @@ function TrackOrder() {
                     value={prefs.whatsappNumber}
                     onChange={(e) => setPrefs({ whatsappNumber: e.target.value })}
                     placeholder="+234 801 234 5678"
-                    className="mt-3 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+                    className="mt-3 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald/40"
                   />
                 )}
               </div>
@@ -321,14 +328,14 @@ function TrackOrder() {
                 className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] py-2.5 text-sm font-semibold text-white hover:brightness-95"
               >
                 <MessageCircle className="size-4" />
-                Chat support on WhatsApp
+                Chat client on WhatsApp
               </a>
             </div>
 
             {/* Delivery */}
             <div className="rounded-2xl border border-border bg-card p-5">
               <h2 className="font-display text-lg font-black flex items-center gap-2">
-                <MapPin className="size-4 text-primary" /> Delivery to
+                <MapPin className="size-4 text-emerald" /> Delivery to
               </h2>
               <p className="mt-3 text-sm">
                 <span className="font-semibold">{order.contact.name}</span>

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ChevronRight, PackageSearch } from "lucide-react";
+import { ChevronRight, PackageSearch, Plus } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { formatNaira } from "@/lib/products";
 import {
@@ -12,7 +12,16 @@ import {
 
 export const Route = createFileRoute("/orders")({
   component: OrdersPage,
-  head: () => ({ meta: [{ title: "My orders — StyleNaija" }] }),
+  head: () => ({
+    meta: [
+      { title: "Orders — StitchNaija" },
+      { name: "description", content: "Manage every order in your StitchNaija studio." },
+      { property: "og:title", content: "Orders — StitchNaija" },
+      { property: "og:description", content: "Track and manage client orders." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
 });
 
 function OrdersPage() {
@@ -26,23 +35,33 @@ function OrdersPage() {
   return (
     <AppShell>
       <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-        <h1 className="font-display text-3xl font-black md:text-4xl">My orders</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Track every drop in real time.
-        </p>
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h1 className="font-display text-3xl font-black md:text-4xl">Orders</h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Every piece, from first cut to final delivery.
+            </p>
+          </div>
+          <Link
+            to="/clients"
+            className="inline-flex items-center gap-1 rounded-full bg-emerald px-4 py-2 text-sm font-semibold text-primary-foreground"
+          >
+            <Plus className="size-4" /> New order
+          </Link>
+        </div>
 
         {orders.length === 0 ? (
           <div className="mt-10 rounded-2xl border border-dashed border-border bg-card p-10 text-center">
             <PackageSearch className="mx-auto size-10 text-muted-foreground" />
             <p className="mt-4 font-display text-xl font-black">No orders yet</p>
             <p className="mt-1 text-sm text-muted-foreground">
-              Place an order and it'll appear here with live tracking.
+              Add a client and create your first order.
             </p>
             <Link
-              to="/shop"
-              className="mt-6 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
+              to="/clients"
+              className="mt-6 inline-flex rounded-full bg-emerald px-5 py-2.5 text-sm font-semibold text-primary-foreground"
             >
-              Start shopping
+              Add a client
             </Link>
           </div>
         ) : (
@@ -55,20 +74,18 @@ function OrdersPage() {
                   <Link
                     to="/orders/$id"
                     params={{ id: o.id }}
-                    className="flex items-center gap-4 rounded-2xl border border-border bg-card p-4 transition hover:border-primary/60 hover:shadow-sm"
+                    className="flex items-center gap-4 rounded-2xl border border-border bg-card p-4 transition hover:border-emerald/60 hover:shadow-sm"
                   >
                     <div className="flex -space-x-2">
                       {o.items.slice(0, 3).map((i) => (
                         <span
                           key={i.productId + i.size}
                           className="size-12 shrink-0 overflow-hidden rounded-full border-2 border-card bg-muted"
-                        >
-                          {/* image lookup happens on the detail page */}
-                        </span>
+                        />
                       ))}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+                      <p className="text-xs font-semibold uppercase tracking-widest text-emerald">
                         {o.id}
                       </p>
                       <p className="truncate font-display text-lg font-black">
@@ -80,7 +97,7 @@ function OrdersPage() {
                           day: "numeric",
                           year: "numeric",
                         })}{" "}
-                        · {o.items.reduce((n, i) => n + i.qty, 0)} items ·{" "}
+                        · {o.contact.name} · {o.items.reduce((n, i) => n + i.qty, 0)} items ·{" "}
                         {formatNaira(o.total)}
                       </p>
                       <div className="mt-2 flex gap-1">
@@ -88,7 +105,7 @@ function OrdersPage() {
                           <span
                             key={i}
                             className={`h-1.5 flex-1 rounded-full ${
-                              i <= stage ? "bg-primary" : "bg-muted"
+                              i <= stage ? "bg-emerald" : "bg-muted"
                             }`}
                           />
                         ))}

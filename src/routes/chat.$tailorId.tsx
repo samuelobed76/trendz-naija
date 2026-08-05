@@ -22,21 +22,21 @@ export const Route = createFileRoute("/chat/$tailorId")({
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: `Chat with ${loaderData?.tailor.name ?? "your tailor"} — StyleNaija` },
+      { title: `Chat with ${loaderData?.tailor.name ?? "your client"} — StitchNaija` },
       {
         name: "description",
-        content: `Message ${loaderData?.tailor.name ?? "a designer"} in ${loaderData?.tailor.city ?? "Nigeria"} about ${loaderData?.tailor.specialty ?? "bespoke fashion"} — prices, measurements and delivery.`,
+        content: `Message ${loaderData?.tailor.name ?? "your client"} about their order, fittings and delivery.`,
       },
       {
         property: "og:title",
-        content: `Chat with ${loaderData?.tailor.name ?? "your tailor"} — StyleNaija`,
+        content: `Chat with ${loaderData?.tailor.name ?? "your client"} — StitchNaija`,
       },
       {
         property: "og:description",
-        content: `Bespoke ${loaderData?.tailor.specialty ?? "fashion"} from ${loaderData?.tailor.city ?? "Nigeria"}, direct in the app.`,
+        content: `Direct in-app conversation with ${loaderData?.tailor.name ?? "your client"}.`,
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
 });
@@ -82,7 +82,7 @@ function ChatThread() {
           </p>
           <Link
             to="/auth"
-            className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground"
+            className="mt-6 inline-flex rounded-full bg-emerald px-6 py-3 text-sm font-semibold text-primary-foreground"
           >
             Sign in / Create account
           </Link>
@@ -108,7 +108,7 @@ function ChatThread() {
             <p className="truncate font-display text-lg font-black leading-tight">{tailor.name}</p>
             <p className="flex items-center gap-2 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-1">
-                <Star className="size-3 fill-current text-accent-foreground" /> {tailor.rating}
+                <Star className="size-3 fill-current text-gold" /> {tailor.rating}
               </span>
               <span className="inline-flex items-center gap-1">
                 <MapPin className="size-3" /> {tailor.city}
@@ -118,7 +118,7 @@ function ChatThread() {
           <button
             onClick={toggleNotify}
             aria-label="Toggle chat notifications"
-            className={`rounded-full border border-border p-2 hover:bg-muted ${notify ? "text-primary" : ""}`}
+            className={`rounded-full border border-border p-2 hover:bg-muted ${notify ? "text-emerald" : ""}`}
           >
             <Bell className="size-4" />
           </button>
@@ -134,13 +134,13 @@ function ChatThread() {
         </div>
 
         {membership.active ? (
-          <p className="mt-2 inline-flex items-center gap-1.5 self-start rounded-full bg-accent/50 px-3 py-1 text-xs font-semibold text-accent-foreground">
+          <p className="mt-2 inline-flex items-center gap-1.5 self-start rounded-full bg-gold/20 px-3 py-1 text-xs font-semibold text-emerald">
             <Crown className="size-3.5" /> Prime priority — replies come first
           </p>
         ) : (
           <Link
             to="/premium"
-            className="mt-2 inline-flex items-center gap-1.5 self-start rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground hover:border-primary/60 hover:text-foreground"
+            className="mt-2 inline-flex items-center gap-1.5 self-start rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground hover:border-emerald/60 hover:text-foreground"
           >
             <Crown className="size-3.5" /> Go Prime for priority replies
           </Link>
@@ -156,7 +156,7 @@ function ChatThread() {
               <div
                 className={`max-w-[80%] rounded-2xl px-3.5 py-2 text-sm ${
                   m.from === "me"
-                    ? "rounded-br-sm bg-primary text-primary-foreground"
+                    ? "rounded-br-sm bg-emerald text-primary-foreground"
                     : "rounded-bl-sm border border-border bg-card text-foreground"
                 }`}
               >
@@ -198,7 +198,7 @@ function ChatThread() {
             <button
               key={q}
               onClick={() => send(q)}
-              className="shrink-0 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium hover:border-primary/60"
+              className="shrink-0 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium hover:border-emerald/60"
             >
               {q}
             </button>
@@ -213,13 +213,13 @@ function ChatThread() {
             maxLength={800}
             placeholder={`Message ${tailor.name.split(" ")[0]}…`}
             aria-label="Message"
-            className="flex-1 rounded-full border border-input bg-background px-4 py-3 text-sm shadow-sm outline-none focus:border-primary"
+            className="flex-1 rounded-full border border-input bg-background px-4 py-3 text-sm shadow-sm outline-none focus:border-emerald"
           />
           <button
             type="submit"
             disabled={!text.trim()}
             aria-label="Send message"
-            className="grid size-12 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground disabled:opacity-50"
+            className="grid size-12 shrink-0 place-items-center rounded-full bg-emerald text-primary-foreground disabled:opacity-50"
           >
             <Send className="size-5" />
           </button>

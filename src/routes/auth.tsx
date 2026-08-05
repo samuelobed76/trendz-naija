@@ -11,16 +11,16 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
   head: () => ({
     meta: [
-      { title: "Sign in or create account — StyleNaija" },
+      { title: "Sign in or create account — StitchNaija" },
       {
         name: "description",
         content:
-          "Sign in to StyleNaija to save your sizes, track orders and chat Nigerian tailors in real time.",
+          "Sign in to StitchNaija to manage your tailoring studio, clients, orders and chat.",
       },
-      { property: "og:title", content: "Sign in or create account — StyleNaija" },
+      { property: "og:title", content: "Sign in or create account — StitchNaija" },
       {
         property: "og:description",
-        content: "Create your StyleNaija account for saved sizes, order tracking and tailor chat.",
+        content: "Create your StitchNaija account to run your tailoring business.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -38,7 +38,7 @@ function AuthPage() {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    if (!loading && user) navigate({ to: "/account", replace: true });
+    if (!loading && user) navigate({ to: "/dashboard", replace: true });
   }, [user, loading, navigate]);
 
   const submit = async (e: React.FormEvent) => {
@@ -62,7 +62,7 @@ function AuthPage() {
         if (error) throw error;
         toast.success("Welcome back 👋");
       }
-      navigate({ to: "/account", replace: true });
+      navigate({ to: "/dashboard", replace: true });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Something went wrong");
     } finally {
@@ -81,17 +81,17 @@ function AuthPage() {
       return;
     }
     if (result.redirected) return;
-    navigate({ to: "/account", replace: true });
+    navigate({ to: "/dashboard", replace: true });
   };
 
   return (
     <AppShell>
       <div className="mx-auto max-w-md px-4 py-8 md:py-14">
         <h1 className="font-display text-3xl font-black md:text-4xl">
-          {mode === "signin" ? "Welcome back" : "Create your account"}
+          {mode === "signin" ? "Welcome back" : "Create your studio"}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Save your sizes, track orders and chat tailors in real time.
+          Manage clients, orders, measurements and chat — all in one place.
         </p>
 
         <button
@@ -111,10 +111,10 @@ function AuthPage() {
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Full name"
+              placeholder="Full name or brand name"
               aria-label="Full name"
               autoComplete="name"
-              className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none focus:border-primary"
+              className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none focus:border-emerald"
             />
           )}
           <input
@@ -125,7 +125,7 @@ function AuthPage() {
             placeholder="Email address"
             aria-label="Email address"
             autoComplete="email"
-            className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none focus:border-primary"
+            className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none focus:border-emerald"
           />
           <input
             type="password"
@@ -136,12 +136,12 @@ function AuthPage() {
             placeholder="Password (min 6 characters)"
             aria-label="Password"
             autoComplete={mode === "signin" ? "current-password" : "new-password"}
-            className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none focus:border-primary"
+            className="w-full rounded-xl border border-input bg-background px-4 py-3 text-sm outline-none focus:border-emerald"
           />
           <button
             type="submit"
             disabled={busy}
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3.5 font-display text-base font-black text-primary-foreground disabled:opacity-60"
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-emerald px-5 py-3.5 font-display text-base font-black text-primary-foreground disabled:opacity-60"
           >
             {busy ? <Loader2 className="size-4 animate-spin" /> : <LogIn className="size-4" />}
             {mode === "signin" ? "Sign in" : "Create account"}
@@ -149,17 +149,17 @@ function AuthPage() {
         </form>
 
         <p className="mt-5 text-center text-sm text-muted-foreground">
-          {mode === "signin" ? "New to StyleNaija?" : "Already have an account?"}{" "}
+          {mode === "signin" ? "New to StitchNaija?" : "Already have an account?"}{" "}
           <button
             onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-            className="font-semibold text-primary hover:underline"
+            className="font-semibold text-emerald hover:underline"
           >
             {mode === "signin" ? "Create account" : "Sign in"}
           </button>
         </p>
 
         <p className="mt-8 text-center text-xs text-muted-foreground">
-          By continuing you agree to StyleNaija's terms.{" "}
+          By continuing you agree to StitchNaija's terms.{" "}
           <Link to="/" className="underline">
             Back home
           </Link>

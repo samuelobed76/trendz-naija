@@ -1,12 +1,12 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Bell, Crown, Heart, LogIn, LogOut, MapPin, MessagesSquare, Package, Ruler, User } from "lucide-react";
+import { Bell, Crown, LayoutDashboard, LogIn, LogOut, MessageSquare, Package, Ruler, Scissors, User, Users } from "lucide-react";
 import { toast } from "sonner";
 import { AppShell } from "@/components/layout/AppShell";
 import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/account")({
   component: AccountPage,
-  head: () => ({ meta: [{ title: "Account — StyleNaija" }] }),
+  head: () => ({ meta: [{ title: "Account — StitchNaija" }] }),
 });
 
 function AccountPage() {
@@ -24,7 +24,7 @@ function AccountPage() {
   return (
     <AppShell>
       <div className="mx-auto max-w-4xl px-4 py-6 md:py-10">
-        <div className="rounded-3xl gradient-warm p-6 text-primary-foreground md:p-10">
+        <div className="rounded-3xl gradient-emerald p-6 text-primary-foreground md:p-10">
           <div className="flex items-center gap-4">
             <div className="grid size-14 place-items-center rounded-full bg-background/20 backdrop-blur">
               <User className="size-7" />
@@ -34,10 +34,10 @@ function AccountPage() {
                 {user ? "Signed in" : "Welcome"}
               </p>
               <h1 className="truncate font-display text-2xl font-black md:text-3xl">
-                {user ? `Hey, ${name}` : "Sign in to StyleNaija"}
+                {user ? `Hey, ${name}` : "Sign in to StitchNaija"}
               </h1>
               <p className="truncate text-sm opacity-90">
-                {user ? user.email : "Save your sizes, addresses and reorder in seconds."}
+                {user ? user.email : "Manage your studio, clients and orders in one place."}
               </p>
             </div>
           </div>
@@ -71,13 +71,14 @@ function AccountPage() {
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <Tile icon={Package} title="Orders" desc="Track and reorder past pieces" href="/orders" />
-          <Tile icon={Crown} title="StyleNaija Prime" desc="Free delivery, priority chat, early drops" href="/premium" />
-          <Tile icon={MessagesSquare} title="Messages" desc="Chat your tailors and designers" href="/chat" />
-          <Tile icon={Ruler} title="My sizes" desc="Save your measurements for accurate fits" />
-          <Tile icon={MapPin} title="Addresses" desc="Manage delivery locations" />
-          <Tile icon={Heart} title="Wishlist" desc="Your saved styles" href="/wishlist" />
-          <Tile icon={Bell} title="Notifications" desc="New drops, sales and order updates" />
+          <Tile icon={LayoutDashboard} title="Dashboard" desc="Studio overview and quick actions" href="/dashboard" />
+          <Tile icon={Scissors} title="Portfolio" desc="Showcase your best work" href="/portfolio" />
+          <Tile icon={Package} title="Orders" desc="Track every piece from cut to delivery" href="/orders" />
+          <Tile icon={Users} title="Clients" desc="Directory and contact details" href="/clients" />
+          <Tile icon={MessageSquare} title="Messages" desc="Chat clients and confirm fittings" href="/chat" />
+          <Tile icon={Ruler} title="Measurements" desc="Saved sizes and fit notes" href="/measurements" />
+          <Tile icon={Crown} title="StitchNaija Prime" desc="Grow with verified badge and analytics" href="/premium" />
+          <Tile icon={Bell} title="Notifications" desc="Order updates and client messages" />
         </div>
       </div>
     </AppShell>
@@ -96,9 +97,9 @@ function Tile({
   href?: string;
 }) {
   const inner = (
-    <div className="flex items-center gap-4 rounded-2xl border border-border bg-card p-4 hover:border-primary transition">
-      <div className="grid size-11 place-items-center rounded-full bg-accent/40">
-        <Icon className="size-5" />
+    <div className="flex items-center gap-4 rounded-2xl border border-border bg-card p-4 hover:border-emerald transition">
+      <div className="grid size-11 place-items-center rounded-full bg-emerald/10">
+        <Icon className="size-5 text-emerald" />
       </div>
       <div>
         <p className="font-semibold">{title}</p>
