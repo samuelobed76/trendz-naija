@@ -285,8 +285,7 @@ export const PRODUCTS: Product[] = [
     reviews: 41,
     stock: 26,
     tags: ["boubou", "lounge", "cotton"],
-    description:
-      "Lightweight cotton voile boubou with side pockets. Impossible to overheat in.",
+    description: "Lightweight cotton voile boubou with side pockets. Impossible to overheat in.",
     new: true,
   },
   {
@@ -304,8 +303,7 @@ export const PRODUCTS: Product[] = [
     reviews: 29,
     stock: 10,
     tags: ["suit", "navy"],
-    description:
-      "A modern-cut navy two-piece with soft shoulders and a mid-rise trouser.",
+    description: "A modern-cut navy two-piece with soft shoulders and a mid-rise trouser.",
   },
   {
     id: "sanni-white-agbada",
@@ -847,8 +845,7 @@ export const PRODUCTS: Product[] = [
     reviews: 201,
     stock: 88,
     tags: ["chino", "trousers", "men"],
-    description:
-      "Mid-rise tapered chinos with a touch of stretch and a clean, no-break hem.",
+    description: "Mid-rise tapered chinos with a touch of stretch and a clean, no-break hem.",
     onSale: true,
   },
   {
@@ -916,8 +913,7 @@ export const PRODUCTS: Product[] = [
     reviews: 112,
     stock: 80,
     tags: ["teens", "cargo", "joggers"],
-    description:
-      "Utility cargo joggers with elastic cuffs, six pockets and a drawcord waist.",
+    description: "Utility cargo joggers with elastic cuffs, six pockets and a drawcord waist.",
     new: true,
   },
   {
@@ -960,8 +956,7 @@ export const PRODUCTS: Product[] = [
     reviews: 63,
     stock: 37,
     tags: ["teens", "varsity", "jacket", "trending"],
-    description:
-      "Classic varsity bomber with contrast sleeves, snap front and chenille patch.",
+    description: "Classic varsity bomber with contrast sleeves, snap front and chenille patch.",
     trending: true,
   },
   // ── Kids ─────────────────────────────────────────────────
@@ -983,8 +978,7 @@ export const PRODUCTS: Product[] = [
     reviews: 91,
     stock: 84,
     tags: ["kids", "tracksuit", "set"],
-    description:
-      "Soft fleece sweatshirt and joggers set with elastic waistband. Machine washable.",
+    description: "Soft fleece sweatshirt and joggers set with elastic waistband. Machine washable.",
   },
   {
     id: "eniola-kids-party-dress",
@@ -1050,8 +1044,7 @@ export const PRODUCTS: Product[] = [
     reviews: 189,
     stock: 95,
     tags: ["slides", "shoes", "leather", "men"],
-    description:
-      "Padded single-strap slides on a cushioned footbed. The easiest shoe you own.",
+    description: "Padded single-strap slides on a cushioned footbed. The easiest shoe you own.",
   },
   {
     id: "ngozi-pointed-pumps",
@@ -1090,8 +1083,7 @@ export const PRODUCTS: Product[] = [
     reviews: 142,
     stock: 110,
     tags: ["kids", "school", "shoes"],
-    description:
-      "Scuff-resistant school shoes with a velcro strap and grippy rubber sole.",
+    description: "Scuff-resistant school shoes with a velcro strap and grippy rubber sole.",
   },
   {
     id: "dami-teen-high-tops",
@@ -1112,8 +1104,7 @@ export const PRODUCTS: Product[] = [
     reviews: 133,
     stock: 72,
     tags: ["teens", "sneakers", "high-tops", "shoes"],
-    description:
-      "Lace-up canvas high-tops with a vulcanised sole — unisex sizing for teens.",
+    description: "Lace-up canvas high-tops with a vulcanised sole — unisex sizing for teens.",
     onSale: true,
     trending: true,
   },

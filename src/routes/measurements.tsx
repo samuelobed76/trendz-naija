@@ -7,7 +7,10 @@ export const Route = createFileRoute("/measurements")({
   head: () => ({
     meta: [
       { title: "Measurements — StitchNaija" },
-      { name: "description", content: "Record and recall client measurements for perfect fits every time." },
+      {
+        name: "description",
+        content: "Record and recall client measurements for perfect fits every time.",
+      },
       { property: "og:title", content: "Measurements — StitchNaija" },
       { property: "og:description", content: "Never lose a measurement sheet again." },
       { property: "og:type", content: "website" },

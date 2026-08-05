@@ -96,14 +96,14 @@ function ChatThread() {
       <div className="mx-auto flex max-w-3xl flex-col px-4 py-4">
         {/* Header */}
         <div className="flex items-center gap-3 rounded-2xl border border-border bg-card p-3">
-          <Link to="/chat" aria-label="Back to messages" className="rounded-full p-1.5 hover:bg-muted">
+          <Link
+            to="/chat"
+            aria-label="Back to messages"
+            className="rounded-full p-1.5 hover:bg-muted"
+          >
             <ArrowLeft className="size-5" />
           </Link>
-          <img
-            src={tailor.image}
-            alt={tailor.name}
-            className="size-11 rounded-full object-cover"
-          />
+          <img src={tailor.image} alt={tailor.name} className="size-11 rounded-full object-cover" />
           <div className="min-w-0 flex-1">
             <p className="truncate font-display text-lg font-black leading-tight">{tailor.name}</p>
             <p className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -149,10 +149,7 @@ function ChatThread() {
         {/* Messages */}
         <div className="mt-3 min-h-[45vh] space-y-3 rounded-2xl bg-muted/40 p-3">
           {messages.map((m) => (
-            <div
-              key={m.id}
-              className={`flex ${m.from === "me" ? "justify-end" : "justify-start"}`}
-            >
+            <div key={m.id} className={`flex ${m.from === "me" ? "justify-end" : "justify-start"}`}>
               <div
                 className={`max-w-[80%] rounded-2xl px-3.5 py-2 text-sm ${
                   m.from === "me"

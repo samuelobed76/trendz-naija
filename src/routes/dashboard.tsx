@@ -1,13 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  Clock,
-  MessageSquare,
-  Package,
-  Plus,
-  TrendingUp,
-  Users,
-} from "lucide-react";
+import { ArrowRight, Clock, MessageSquare, Package, Plus, TrendingUp, Users } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { computeStageIndex, loadOrders, STATUS_STEPS } from "@/lib/orders";
 import { useConversations } from "@/lib/chat";
@@ -19,7 +11,8 @@ export const Route = createFileRoute("/dashboard")({
       { title: "Dashboard — StitchNaija" },
       {
         name: "description",
-        content: "Your StitchNaija studio dashboard: orders, clients, messages and revenue at a glance.",
+        content:
+          "Your StitchNaija studio dashboard: orders, clients, messages and revenue at a glance.",
       },
       { property: "og:title", content: "Dashboard — StitchNaija" },
       { property: "og:description", content: "Manage your tailoring studio from one dashboard." },
@@ -55,10 +48,25 @@ function Dashboard() {
 
         {/* KPIs */}
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <KpiCard icon={Package} label="Active orders" value={activeOrders.length.toString()} tone="emerald" />
+          <KpiCard
+            icon={Package}
+            label="Active orders"
+            value={activeOrders.length.toString()}
+            tone="emerald"
+          />
           <KpiCard icon={Users} label="Total clients" value="24" tone="teal" />
-          <KpiCard icon={TrendingUp} label="Revenue" value={`₦${(revenue / 1000).toFixed(0)}k`} tone="gold" />
-          <KpiCard icon={MessageSquare} label="Unread messages" value={unread.toString()} tone="emerald" />
+          <KpiCard
+            icon={TrendingUp}
+            label="Revenue"
+            value={`₦${(revenue / 1000).toFixed(0)}k`}
+            tone="gold"
+          />
+          <KpiCard
+            icon={MessageSquare}
+            label="Unread messages"
+            value={unread.toString()}
+            tone="emerald"
+          />
         </div>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_360px]">
@@ -66,10 +74,7 @@ function Dashboard() {
           <section className="rounded-2xl border border-border bg-card p-5 md:p-6">
             <div className="flex items-center justify-between">
               <h2 className="font-display text-xl font-black">Active orders</h2>
-              <Link
-                to="/orders"
-                className="text-sm font-semibold text-emerald hover:underline"
-              >
+              <Link to="/orders" className="text-sm font-semibold text-emerald hover:underline">
                 View all
               </Link>
             </div>
@@ -99,7 +104,9 @@ function Dashboard() {
                           <Package className="size-5 text-emerald" />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-xs font-semibold uppercase tracking-widest text-emerald">{o.id}</p>
+                          <p className="text-xs font-semibold uppercase tracking-widest text-emerald">
+                            {o.id}
+                          </p>
                           <p className="font-medium truncate">{step.label}</p>
                           <p className="text-xs text-muted-foreground">
                             {o.contact.name} · {o.items.reduce((n, i) => n + i.qty, 0)} items

@@ -1,5 +1,17 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Bell, Crown, LayoutDashboard, LogIn, LogOut, MessageSquare, Package, Ruler, Scissors, User, Users } from "lucide-react";
+import {
+  Bell,
+  Crown,
+  LayoutDashboard,
+  LogIn,
+  LogOut,
+  MessageSquare,
+  Package,
+  Ruler,
+  Scissors,
+  User,
+  Users,
+} from "lucide-react";
 import { toast } from "sonner";
 import { AppShell } from "@/components/layout/AppShell";
 import { useAuth } from "@/lib/auth";
@@ -71,13 +83,43 @@ function AccountPage() {
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <Tile icon={LayoutDashboard} title="Dashboard" desc="Studio overview and quick actions" href="/dashboard" />
-          <Tile icon={Scissors} title="Portfolio" desc="Showcase your best work" href="/portfolio" />
-          <Tile icon={Package} title="Orders" desc="Track every piece from cut to delivery" href="/orders" />
+          <Tile
+            icon={LayoutDashboard}
+            title="Dashboard"
+            desc="Studio overview and quick actions"
+            href="/dashboard"
+          />
+          <Tile
+            icon={Scissors}
+            title="Portfolio"
+            desc="Showcase your best work"
+            href="/portfolio"
+          />
+          <Tile
+            icon={Package}
+            title="Orders"
+            desc="Track every piece from cut to delivery"
+            href="/orders"
+          />
           <Tile icon={Users} title="Clients" desc="Directory and contact details" href="/clients" />
-          <Tile icon={MessageSquare} title="Messages" desc="Chat clients and confirm fittings" href="/chat" />
-          <Tile icon={Ruler} title="Measurements" desc="Saved sizes and fit notes" href="/measurements" />
-          <Tile icon={Crown} title="StitchNaija Prime" desc="Grow with verified badge and analytics" href="/premium" />
+          <Tile
+            icon={MessageSquare}
+            title="Messages"
+            desc="Chat clients and confirm fittings"
+            href="/chat"
+          />
+          <Tile
+            icon={Ruler}
+            title="Measurements"
+            desc="Saved sizes and fit notes"
+            href="/measurements"
+          />
+          <Tile
+            icon={Crown}
+            title="StitchNaija Prime"
+            desc="Grow with verified badge and analytics"
+            href="/premium"
+          />
           <Tile icon={Bell} title="Notifications" desc="Order updates and client messages" />
         </div>
       </div>

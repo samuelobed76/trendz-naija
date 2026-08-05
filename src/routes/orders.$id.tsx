@@ -36,7 +36,10 @@ export const Route = createFileRoute("/orders/$id")({
   head: () => ({
     meta: [
       { title: "Track order — StitchNaija" },
-      { name: "description", content: "Track a client order through the StitchNaija studio pipeline." },
+      {
+        name: "description",
+        content: "Track a client order through the StitchNaija studio pipeline.",
+      },
       { property: "og:title", content: "Track order — StitchNaija" },
       { property: "og:description", content: "Live order status from received to delivered." },
       { property: "og:type", content: "website" },
@@ -102,7 +105,8 @@ function TrackOrder() {
   const stage = computeStageIndex(order, now);
   const items = orderItemsWithProducts(order);
   const timestamps = stageTimestamps(order);
-  const nextIn = stage < 3 ? Math.max(0, order.stageMs - ((now - order.createdAt) % order.stageMs)) : 0;
+  const nextIn =
+    stage < 3 ? Math.max(0, order.stageMs - ((now - order.createdAt) % order.stageMs)) : 0;
   const eta = new Date(order.createdAt + 3 * order.stageMs + 24 * 60 * 60 * 1000);
 
   const togglePush = async () => {
@@ -158,7 +162,11 @@ function TrackOrder() {
               Estimated delivery
             </p>
             <p className="font-display text-lg font-black">
-              {eta.toLocaleDateString("en-NG", { weekday: "short", month: "short", day: "numeric" })}
+              {eta.toLocaleDateString("en-NG", {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+              })}
             </p>
           </div>
         </header>
@@ -261,7 +269,10 @@ function TrackOrder() {
               </ul>
               <div className="mt-4 space-y-1 border-t border-border pt-3 text-sm">
                 <Row label="Subtotal" value={formatNaira(order.subtotal)} />
-                <Row label="Shipping" value={order.shipping === 0 ? "Free" : formatNaira(order.shipping)} />
+                <Row
+                  label="Shipping"
+                  value={order.shipping === 0 ? "Free" : formatNaira(order.shipping)}
+                />
                 <Row label="Total" value={formatNaira(order.total)} bold />
               </div>
             </div>

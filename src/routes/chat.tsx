@@ -43,9 +43,7 @@ function ChatList() {
         <div className="flex items-center justify-between gap-3">
           <div>
             <h1 className="font-display text-3xl font-black md:text-4xl">Messages</h1>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Talk directly with your clients.
-            </p>
+            <p className="mt-1 text-sm text-muted-foreground">Talk directly with your clients.</p>
           </div>
           {membership.active && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/20 px-3 py-1 text-xs font-semibold text-emerald">

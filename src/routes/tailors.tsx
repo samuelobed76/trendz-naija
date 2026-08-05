@@ -2,7 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { AppShell } from "@/components/layout/AppShell";
 import { TAILORS, NIGERIAN_CITIES, CITY_COORDS, distanceKm, type Tailor } from "@/lib/tailors";
-import { MapPin, Star, MessageCircle, Loader2, Navigation, Scissors, MessagesSquare } from "lucide-react";
+import {
+  MapPin,
+  Star,
+  MessageCircle,
+  Loader2,
+  Navigation,
+  Scissors,
+  MessagesSquare,
+} from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/tailors")({
@@ -33,10 +41,7 @@ function TailorsPage() {
   const [city, setCity] = useState<string>("");
   const [specialty, setSpecialty] = useState<string>("");
 
-  const specialties = useMemo(
-    () => Array.from(new Set(TAILORS.flatMap((t) => t.tags))).sort(),
-    [],
-  );
+  const specialties = useMemo(() => Array.from(new Set(TAILORS.flatMap((t) => t.tags))).sort(), []);
 
   useEffect(() => {
     // Auto-attempt geolocation once on mount
@@ -61,7 +66,7 @@ function TailorsPage() {
     );
   }
 
-  const origin: Coords | null = coords ?? (city ? CITY_COORDS[city] ?? null : null);
+  const origin: Coords | null = coords ?? (city ? (CITY_COORDS[city] ?? null) : null);
 
   const results = useMemo(() => {
     let list: (Tailor & { distance?: number })[] = TAILORS.map((t) => ({
@@ -202,10 +207,10 @@ function TailorCard({ t }: { t: Tailor & { distance?: number } }) {
         </div>
         <div className="mt-4 flex items-center justify-between gap-2 border-t border-border pt-3">
           <div className="text-sm">
-            <div className="font-semibold">
-              from ₦{t.priceFrom.toLocaleString()}
+            <div className="font-semibold">from ₦{t.priceFrom.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground">
+              {t.turnaround} · {t.reviews} reviews
             </div>
-            <div className="text-xs text-muted-foreground">{t.turnaround} · {t.reviews} reviews</div>
           </div>
           <div className="flex items-center gap-1.5">
             <a

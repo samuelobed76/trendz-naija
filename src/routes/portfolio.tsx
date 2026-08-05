@@ -24,14 +24,56 @@ export const Route = createFileRoute("/portfolio")({
 });
 
 const LOOKS = [
-  { id: "l1", image: portfolio1, title: "Emerald Aso-Oke Gown", category: "Bridal", price: "₦96,000" },
-  { id: "l2", image: portfolio2, title: "Charcoal Agbada Set", category: "Native", price: "₦145,000" },
+  {
+    id: "l1",
+    image: portfolio1,
+    title: "Emerald Aso-Oke Gown",
+    category: "Bridal",
+    price: "₦96,000",
+  },
+  {
+    id: "l2",
+    image: portfolio2,
+    title: "Charcoal Agbada Set",
+    category: "Native",
+    price: "₦145,000",
+  },
   { id: "l3", image: portfolio3, title: "Ankara Couple Set", category: "Casual", price: "₦68,000" },
-  { id: "l4", image: portfolio4, title: "Traditional Kids Wear", category: "Kids", price: "₦28,000" },
-  { id: "l1", image: portfolio2, title: "Navy Two-Piece Suit", category: "Suits", price: "₦148,000" },
-  { id: "l2", image: portfolio1, title: "Gold-Embroidered Kaftan", category: "Evening", price: "₦82,000" },
-  { id: "l3", image: portfolio4, title: "Coral Beads & Wrapper", category: "Traditional", price: "₦74,000" },
-  { id: "l4", image: portfolio3, title: "Printed Resort Set", category: "Casual", price: "₦45,000" },
+  {
+    id: "l4",
+    image: portfolio4,
+    title: "Traditional Kids Wear",
+    category: "Kids",
+    price: "₦28,000",
+  },
+  {
+    id: "l1",
+    image: portfolio2,
+    title: "Navy Two-Piece Suit",
+    category: "Suits",
+    price: "₦148,000",
+  },
+  {
+    id: "l2",
+    image: portfolio1,
+    title: "Gold-Embroidered Kaftan",
+    category: "Evening",
+    price: "₦82,000",
+  },
+  {
+    id: "l3",
+    image: portfolio4,
+    title: "Coral Beads & Wrapper",
+    category: "Traditional",
+    price: "₦74,000",
+  },
+  {
+    id: "l4",
+    image: portfolio3,
+    title: "Printed Resort Set",
+    category: "Casual",
+    price: "₦45,000",
+  },
 ];
 
 const CATEGORIES = ["All", "Bridal", "Native", "Suits", "Casual", "Kids", "Traditional", "Evening"];
@@ -86,7 +128,9 @@ function Portfolio() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/10 to-transparent opacity-90" />
               <div className="absolute bottom-4 left-4 right-4 text-background">
-                <p className="text-[10px] font-bold uppercase tracking-widest opacity-80">{look.category}</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest opacity-80">
+                  {look.category}
+                </p>
                 <p className="font-display text-lg font-black leading-tight">{look.title}</p>
                 <p className="mt-1 text-sm opacity-90">{look.price}</p>
               </div>

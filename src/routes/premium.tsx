@@ -50,8 +50,7 @@ function PremiumPage() {
             StitchNaija Prime
           </h1>
           <p className="mt-3 max-w-xl text-sm text-primary-foreground/90 md:text-base">
-            Verified badge, analytics, priority client replies and first dibs on every new
-            feature.
+            Verified badge, analytics, priority client replies and first dibs on every new feature.
           </p>
           <div className="mt-6 flex flex-wrap gap-4 text-sm">
             <span className="inline-flex items-center gap-2">

@@ -3,12 +3,7 @@ import { useEffect, useState } from "react";
 import { ChevronRight, PackageSearch, Plus } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { formatNaira } from "@/lib/products";
-import {
-  computeStageIndex,
-  loadOrders,
-  STATUS_STEPS,
-  type Order,
-} from "@/lib/orders";
+import { computeStageIndex, loadOrders, STATUS_STEPS, type Order } from "@/lib/orders";
 
 export const Route = createFileRoute("/orders")({
   component: OrdersPage,
@@ -88,9 +83,7 @@ function OrdersPage() {
                       <p className="text-xs font-semibold uppercase tracking-widest text-emerald">
                         {o.id}
                       </p>
-                      <p className="truncate font-display text-lg font-black">
-                        {step.label}
-                      </p>
+                      <p className="truncate font-display text-lg font-black">{step.label}</p>
                       <p className="text-xs text-muted-foreground">
                         {new Date(o.createdAt).toLocaleDateString("en-NG", {
                           month: "short",

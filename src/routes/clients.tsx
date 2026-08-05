@@ -7,7 +7,10 @@ export const Route = createFileRoute("/clients")({
   head: () => ({
     meta: [
       { title: "Clients — StitchNaija" },
-      { name: "description", content: "Manage your client list, measurements and order history on StitchNaija." },
+      {
+        name: "description",
+        content: "Manage your client list, measurements and order history on StitchNaija.",
+      },
       { property: "og:title", content: "Clients — StitchNaija" },
       { property: "og:description", content: "Your tailoring client directory." },
       { property: "og:type", content: "website" },
@@ -17,12 +20,54 @@ export const Route = createFileRoute("/clients")({
 });
 
 const CLIENTS = [
-  { id: "c1", name: "Amaka Okafor", phone: "0801 234 5671", orders: 4, last: "2 days ago", city: "Lagos" },
-  { id: "c2", name: "Tunde Balogun", phone: "0802 345 6782", orders: 2, last: "1 week ago", city: "Lagos" },
-  { id: "c3", name: "Chioma Nwosu", phone: "0803 456 7893", orders: 7, last: "3 days ago", city: "Enugu" },
-  { id: "c4", name: "Efe Adeyemi", phone: "0804 567 8904", orders: 1, last: "2 weeks ago", city: "Port Harcourt" },
-  { id: "c5", name: "Halima Yusuf", phone: "0805 678 9015", orders: 3, last: "Yesterday", city: "Abuja" },
-  { id: "c6", name: "Bola Johnson", phone: "0806 789 0126", orders: 5, last: "5 days ago", city: "Lagos" },
+  {
+    id: "c1",
+    name: "Amaka Okafor",
+    phone: "0801 234 5671",
+    orders: 4,
+    last: "2 days ago",
+    city: "Lagos",
+  },
+  {
+    id: "c2",
+    name: "Tunde Balogun",
+    phone: "0802 345 6782",
+    orders: 2,
+    last: "1 week ago",
+    city: "Lagos",
+  },
+  {
+    id: "c3",
+    name: "Chioma Nwosu",
+    phone: "0803 456 7893",
+    orders: 7,
+    last: "3 days ago",
+    city: "Enugu",
+  },
+  {
+    id: "c4",
+    name: "Efe Adeyemi",
+    phone: "0804 567 8904",
+    orders: 1,
+    last: "2 weeks ago",
+    city: "Port Harcourt",
+  },
+  {
+    id: "c5",
+    name: "Halima Yusuf",
+    phone: "0805 678 9015",
+    orders: 3,
+    last: "Yesterday",
+    city: "Abuja",
+  },
+  {
+    id: "c6",
+    name: "Bola Johnson",
+    phone: "0806 789 0126",
+    orders: 5,
+    last: "5 days ago",
+    city: "Lagos",
+  },
 ];
 
 function Clients() {
@@ -65,7 +110,9 @@ function Clients() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="font-semibold">{c.name}</p>
-                  <p className="text-xs text-muted-foreground">{c.city} · {c.orders} orders · Last active {c.last}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {c.city} · {c.orders} orders · Last active {c.last}
+                  </p>
                 </div>
                 <div className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground">
                   <Phone className="size-4" />

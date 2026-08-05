@@ -105,9 +105,7 @@ export function advanceStage(id: string) {
 
 export function stageTimestamps(o: Order): (number | null)[] {
   const stage = computeStageIndex(o);
-  return STATUS_STEPS.map((_, i) =>
-    i <= stage ? o.createdAt + i * o.stageMs : null,
-  );
+  return STATUS_STEPS.map((_, i) => (i <= stage ? o.createdAt + i * o.stageMs : null));
 }
 
 export function loadNotifPrefs(): NotifPrefs {

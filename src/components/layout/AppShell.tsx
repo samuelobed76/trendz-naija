@@ -80,28 +80,60 @@ function Header() {
       {open && (
         <div className="md:hidden border-t border-border bg-background">
           <nav className="mx-auto grid max-w-7xl gap-1 px-4 py-3 text-sm font-medium">
-            <Link to="/" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+            <Link
+              to="/"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
               Home
             </Link>
-            <Link to="/dashboard" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+            <Link
+              to="/dashboard"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
               Dashboard
             </Link>
-            <Link to="/portfolio" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+            <Link
+              to="/portfolio"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
               Portfolio
             </Link>
-            <Link to="/orders" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+            <Link
+              to="/orders"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
               Orders
             </Link>
-            <Link to="/clients" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+            <Link
+              to="/clients"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
               Clients
             </Link>
-            <Link to="/measurements" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+            <Link
+              to="/measurements"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
               Measurements
             </Link>
-            <Link to="/chat" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+            <Link
+              to="/chat"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
               Messages
             </Link>
-            <Link to="/account" onClick={() => setOpen(false)} className="rounded-md px-3 py-2 hover:bg-muted">
+            <Link
+              to="/account"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
               Account
             </Link>
           </nav>
@@ -168,7 +200,8 @@ function Footer() {
             </span>
           </div>
           <p className="mt-3 text-sm text-muted-foreground max-w-xs">
-            The workspace for Nigerian tailors and fashion designers to manage clients, orders and craft.
+            The workspace for Nigerian tailors and fashion designers to manage clients, orders and
+            craft.
           </p>
         </div>
         <FooterCol title="Studio" links={["Dashboard", "Portfolio", "Orders", "Clients"]} />
