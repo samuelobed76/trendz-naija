@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/checkout")({
   component: Checkout,
-  head: () => ({ meta: [{ title: "Checkout — StyleNaija" }] }),
+  head: () => ({ meta: [{ title: "Checkout — StitchNaija" }] }),
 });
 
 type Pay = "card" | "transfer" | "cod";
@@ -83,7 +83,13 @@ function Checkout() {
                 <Field label="Full name" name="name" placeholder="Adaeze Okafor" required />
                 <Field label="Phone" name="phone" placeholder="+234 801 234 5678" required />
                 <div className="md:col-span-2">
-                  <Field label="Email" name="email" type="email" placeholder="you@example.com" required />
+                  <Field
+                    label="Email"
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    required
+                  />
                 </div>
               </div>
             </Card>
@@ -91,7 +97,12 @@ function Checkout() {
             <Card title="Delivery address">
               <div className="grid gap-3 md:grid-cols-2">
                 <div className="md:col-span-2">
-                  <Field label="Street address" name="street" placeholder="14 Awolowo Road" required />
+                  <Field
+                    label="Street address"
+                    name="street"
+                    placeholder="14 Awolowo Road"
+                    required
+                  />
                 </div>
                 <Field label="City" name="city" placeholder="Ikoyi" required />
                 <label className="grid gap-1 text-sm">
@@ -117,9 +128,30 @@ function Checkout() {
 
             <Card title="Payment">
               <div className="grid gap-2">
-                <PayOption id="card" value={pay} onChange={setPay} icon={CreditCard} title="Card" desc="Secure card payment via Paystack" />
-                <PayOption id="transfer" value={pay} onChange={setPay} icon={Banknote} title="Bank transfer" desc="Pay to a one-time account, order ships on confirmation" />
-                <PayOption id="cod" value={pay} onChange={setPay} icon={Truck} title="Cash on delivery" desc="Pay when your order arrives (Lagos only)" />
+                <PayOption
+                  id="card"
+                  value={pay}
+                  onChange={setPay}
+                  icon={CreditCard}
+                  title="Card"
+                  desc="Secure card payment via Paystack"
+                />
+                <PayOption
+                  id="transfer"
+                  value={pay}
+                  onChange={setPay}
+                  icon={Banknote}
+                  title="Bank transfer"
+                  desc="Pay to a one-time account, order ships on confirmation"
+                />
+                <PayOption
+                  id="cod"
+                  value={pay}
+                  onChange={setPay}
+                  icon={Truck}
+                  title="Cash on delivery"
+                  desc="Pay when your order arrives (Lagos only)"
+                />
               </div>
             </Card>
           </div>
@@ -132,7 +164,9 @@ function Checkout() {
                   <img src={i.product.image} alt="" className="size-14 rounded-lg object-cover" />
                   <div className="min-w-0 flex-1 text-sm">
                     <p className="truncate font-medium">{i.product.name}</p>
-                    <p className="text-xs text-muted-foreground">Size {i.size} · Qty {i.qty}</p>
+                    <p className="text-xs text-muted-foreground">
+                      Size {i.size} · Qty {i.qty}
+                    </p>
                   </div>
                   <p className="text-sm font-semibold">{formatNaira(i.product.price * i.qty)}</p>
                 </li>
@@ -208,7 +242,12 @@ function PayOption({
         active ? "border-primary bg-primary/5" : "border-border hover:border-primary/60",
       )}
     >
-      <span className={cn("grid size-10 place-items-center rounded-full", active ? "bg-primary text-primary-foreground" : "bg-muted")}>
+      <span
+        className={cn(
+          "grid size-10 place-items-center rounded-full",
+          active ? "bg-primary text-primary-foreground" : "bg-muted",
+        )}
+      >
         <Icon className="size-5" />
       </span>
       <span className="flex-1">

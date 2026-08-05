@@ -2,19 +2,27 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { AppShell } from "@/components/layout/AppShell";
 import { TAILORS, NIGERIAN_CITIES, CITY_COORDS, distanceKm, type Tailor } from "@/lib/tailors";
-import { MapPin, Star, MessageCircle, Loader2, Navigation, Scissors, MessagesSquare } from "lucide-react";
+import {
+  MapPin,
+  Star,
+  MessageCircle,
+  Loader2,
+  Navigation,
+  Scissors,
+  MessagesSquare,
+} from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/tailors")({
   head: () => ({
     meta: [
-      { title: "Find Tailors & Designers Near You — StyleNaija" },
+      { title: "Find Tailors & Designers Near You — StitchNaija" },
       {
         name: "description",
         content:
           "Discover trusted Nigerian tailors and fashion designers close to you. Filter by specialty, city and distance, then message on WhatsApp.",
       },
-      { property: "og:title", content: "Find Tailors & Designers Near You — StyleNaija" },
+      { property: "og:title", content: "Find Tailors & Designers Near You — StitchNaija" },
       {
         property: "og:description",
         content:
@@ -33,10 +41,7 @@ function TailorsPage() {
   const [city, setCity] = useState<string>("");
   const [specialty, setSpecialty] = useState<string>("");
 
-  const specialties = useMemo(
-    () => Array.from(new Set(TAILORS.flatMap((t) => t.tags))).sort(),
-    [],
-  );
+  const specialties = useMemo(() => Array.from(new Set(TAILORS.flatMap((t) => t.tags))).sort(), []);
 
   useEffect(() => {
     // Auto-attempt geolocation once on mount
@@ -61,7 +66,7 @@ function TailorsPage() {
     );
   }
 
-  const origin: Coords | null = coords ?? (city ? CITY_COORDS[city] ?? null : null);
+  const origin: Coords | null = coords ?? (city ? (CITY_COORDS[city] ?? null) : null);
 
   const results = useMemo(() => {
     let list: (Tailor & { distance?: number })[] = TAILORS.map((t) => ({
@@ -77,7 +82,7 @@ function TailorsPage() {
   return (
     <AppShell>
       {/* Hero */}
-      <section className="gradient-warm text-primary-foreground">
+      <section className="gradient-emerald text-primary-foreground">
         <div className="mx-auto max-w-7xl px-4 py-10 md:py-16">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
             <Scissors className="size-3.5" /> Bespoke & Local
@@ -202,15 +207,15 @@ function TailorCard({ t }: { t: Tailor & { distance?: number } }) {
         </div>
         <div className="mt-4 flex items-center justify-between gap-2 border-t border-border pt-3">
           <div className="text-sm">
-            <div className="font-semibold">
-              from ₦{t.priceFrom.toLocaleString()}
+            <div className="font-semibold">from ₦{t.priceFrom.toLocaleString()}</div>
+            <div className="text-xs text-muted-foreground">
+              {t.turnaround} · {t.reviews} reviews
             </div>
-            <div className="text-xs text-muted-foreground">{t.turnaround} · {t.reviews} reviews</div>
           </div>
           <div className="flex items-center gap-1.5">
             <a
               href={`https://wa.me/${t.whatsapp}?text=${encodeURIComponent(
-                `Hi ${t.name}, I found you on StyleNaija and would love to discuss a piece.`,
+                `Hi ${t.name}, I found you on StitchNaija and would love to discuss a piece.`,
               )}`}
               target="_blank"
               rel="noreferrer"

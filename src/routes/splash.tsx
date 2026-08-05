@@ -5,16 +5,16 @@ export const Route = createFileRoute("/splash")({
   component: SplashScreen,
   head: () => ({
     meta: [
-      { title: "Welcome to StyleNaija" },
+      { title: "Welcome to StitchNaija" },
       {
         name: "description",
         content:
-          "StyleNaija is loading — bold Nigerian fashion, tailors near you and confident sizing in one app.",
+          "StitchNaija is loading — the workspace for Nigerian tailors and fashion designers.",
       },
-      { property: "og:title", content: "Welcome to StyleNaija" },
+      { property: "og:title", content: "Welcome to StitchNaija" },
       {
         property: "og:description",
-        content: "Bold Nigerian fashion, tailors near you and confident sizing in one app.",
+        content: "The workspace for Nigerian tailors and fashion designers.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -62,36 +62,36 @@ function SplashScreen() {
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background px-6 text-center"
       role="status"
       aria-live="polite"
-      aria-label="StyleNaija splash screen"
+      aria-label="StitchNaija splash screen"
     >
       <div className="flex flex-col items-center">
         <div className="relative">
-          <span className="grid size-20 place-items-center rounded-3xl gradient-warm text-primary-foreground shadow-2xl shadow-primary/25 animate-pulse">
+          <span className="grid size-20 place-items-center rounded-3xl gradient-emerald text-primary-foreground shadow-2xl shadow-emerald/25 animate-pulse">
             <span className="font-display text-4xl font-black">S</span>
           </span>
-          <span className="absolute -bottom-2 -right-2 grid size-7 place-items-center rounded-full bg-accent text-accent-foreground">
-            <span className="block size-2.5 rounded-full bg-foreground" />
+          <span className="absolute -bottom-2 -right-2 grid size-7 place-items-center rounded-full bg-gold/30 text-gold">
+            <span className="block size-2.5 rounded-full bg-gold" />
           </span>
         </div>
 
         <h1 className="mt-8 font-display text-3xl font-black tracking-tight">
-          Style<span className="text-gradient-warm">Naija</span>
+          Stitch<span className="text-gradient-emerald">Naija</span>
         </h1>
         <p className="mt-2 max-w-xs text-sm text-muted-foreground">
-          Confident fashion, made for your body, your occasion, your weather.
+          The tailor's workspace — clients, orders, measurements and growth in one place.
         </p>
       </div>
 
       <div className="mt-12 w-full max-w-[220px]">
         <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
           <div
-            className="h-full rounded-full bg-primary transition-[width] duration-75 ease-linear"
+            className="h-full rounded-full bg-emerald transition-[width] duration-75 ease-linear"
             style={{ width: `${progress}%` }}
             aria-hidden="true"
           />
         </div>
         <p className="mt-3 text-xs font-medium uppercase tracking-widest text-muted-foreground">
-          Loading your styles…
+          Setting up your studio…
         </p>
       </div>
 

@@ -7,7 +7,7 @@ import { useStore } from "@/lib/store";
 
 export const Route = createFileRoute("/wishlist")({
   component: WishlistPage,
-  head: () => ({ meta: [{ title: "Wishlist — StyleNaija" }] }),
+  head: () => ({ meta: [{ title: "Saved — StitchNaija" }] }),
 });
 
 function WishlistPage() {
@@ -24,8 +24,13 @@ function WishlistPage() {
           <div className="mt-10 grid place-items-center rounded-3xl border border-dashed border-border py-20 text-center">
             <Heart className="size-10 text-muted-foreground" />
             <p className="mt-3 font-semibold">No saves yet</p>
-            <p className="text-sm text-muted-foreground">Tap the heart on any piece to save it here.</p>
-            <Link to="/shop" className="mt-6 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground">
+            <p className="text-sm text-muted-foreground">
+              Tap the heart on any piece to save it here.
+            </p>
+            <Link
+              to="/shop"
+              className="mt-6 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground"
+            >
               Explore the shop
             </Link>
           </div>

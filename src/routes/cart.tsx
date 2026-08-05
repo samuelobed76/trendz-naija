@@ -6,7 +6,7 @@ import { useStore } from "@/lib/store";
 
 export const Route = createFileRoute("/cart")({
   component: CartPage,
-  head: () => ({ meta: [{ title: "Your bag — StyleNaija" }] }),
+  head: () => ({ meta: [{ title: "Your bag — StitchNaija" }] }),
 });
 
 function CartPage() {
@@ -27,7 +27,9 @@ function CartPage() {
           <div className="mt-10 grid place-items-center rounded-3xl border border-dashed border-border py-20 text-center">
             <ShoppingBag className="size-10 text-muted-foreground" />
             <p className="mt-3 font-semibold">Your bag is empty</p>
-            <p className="text-sm text-muted-foreground">Add pieces from the shop to get started.</p>
+            <p className="text-sm text-muted-foreground">
+              Add pieces from the shop to get started.
+            </p>
             <Link
               to="/shop"
               className="mt-6 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground"
@@ -39,7 +41,10 @@ function CartPage() {
           <div className="mt-6 grid gap-8 md:grid-cols-[1fr_360px]">
             <ul className="space-y-4">
               {items.map((i) => (
-                <li key={i.productId + i.size} className="flex gap-4 rounded-2xl border border-border bg-card p-3 md:p-4">
+                <li
+                  key={i.productId + i.size}
+                  className="flex gap-4 rounded-2xl border border-border bg-card p-3 md:p-4"
+                >
                   <Link to="/product/$id" params={{ id: i.productId }} className="shrink-0">
                     <img
                       src={i.product.image}
@@ -50,8 +55,14 @@ function CartPage() {
                   </Link>
                   <div className="grid min-w-0 flex-1 grid-cols-[minmax(0,1fr)_auto] gap-2">
                     <div className="min-w-0">
-                      <p className="text-[11px] uppercase tracking-wider text-muted-foreground">{i.product.brand}</p>
-                      <Link to="/product/$id" params={{ id: i.productId }} className="block truncate font-semibold hover:text-primary">
+                      <p className="text-[11px] uppercase tracking-wider text-muted-foreground">
+                        {i.product.brand}
+                      </p>
+                      <Link
+                        to="/product/$id"
+                        params={{ id: i.productId }}
+                        className="block truncate font-semibold hover:text-primary"
+                      >
                         {i.product.name}
                       </Link>
                       <p className="mt-0.5 text-xs text-muted-foreground">Size {i.size}</p>
@@ -83,7 +94,9 @@ function CartPage() {
                     </div>
                     <div className="shrink-0 text-right">
                       <p className="font-bold">{formatNaira(i.product.price * i.qty)}</p>
-                      <p className="text-xs text-muted-foreground">{formatNaira(i.product.price)} each</p>
+                      <p className="text-xs text-muted-foreground">
+                        {formatNaira(i.product.price)} each
+                      </p>
                     </div>
                   </div>
                 </li>

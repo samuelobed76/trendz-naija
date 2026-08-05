@@ -81,36 +81,33 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "StyleNaija — Confident fashion, made for you" },
+      { title: "StitchNaija — The tailor's workspace" },
       {
         name: "description",
         content:
-          "Shop bold Nigerian fashion, loungewear, shoes and suits with size-confident recommendations and fast Lagos delivery.",
+          "StitchNaija helps Nigerian tailors and fashion designers manage clients, orders, measurements and conversations in one elegant workspace.",
       },
-      { name: "author", content: "StyleNaija" },
-      { name: "theme-color", content: "#c0562a" },
-      { property: "og:title", content: "StyleNaija — Confident fashion, made for you" },
+      { name: "author", content: "StitchNaija" },
+      { name: "theme-color", content: "#064e3b" },
+      { property: "og:title", content: "StitchNaija — The tailor's workspace" },
       {
         property: "og:description",
         content:
-          "Bold Nigerian fashion, personalized to your size. Discover trending styles, loungewear, and complete-the-look bundles.",
+          "Manage your tailoring business: clients, orders, measurements and chat — all in one place.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "manifest", href: "/manifest.webmanifest" },
-      { rel: "apple-touch-icon", href: "/favicon.ico" },
+      { rel: "apple-touch-icon", href: "/favicon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Fira+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap",
       },
     ],
   }),

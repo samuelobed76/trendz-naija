@@ -17,17 +17,18 @@ export const Route = createFileRoute("/shop")({
   component: Shop,
   head: () => ({
     meta: [
-      { title: "Shop — StyleNaija" },
-      { name: "description", content: "Browse Nigerian fashion by category, size, color and occasion." },
+      { title: "Shop — StitchNaija" },
+      {
+        name: "description",
+        content: "Browse fabrics, ready-to-wear and accessories for your clients.",
+      },
     ],
   }),
 });
 
 function Shop() {
   const { category, q } = Route.useSearch();
-  const [selectedCat, setSelectedCat] = useState<Category | "All">(
-    (category as Category) || "All",
-  );
+  const [selectedCat, setSelectedCat] = useState<Category | "All">((category as Category) || "All");
   const [query, setQuery] = useState(q || "");
   const [sort, setSort] = useState<"featured" | "priceAsc" | "priceDesc" | "rating">("featured");
   const [priceMax, setPriceMax] = useState(200000);
@@ -175,40 +176,38 @@ function Shop() {
                 <p className="mt-3 font-semibold">No matches</p>
                 <p className="text-sm text-muted-foreground">Try widening your filters.</p>
               </div>
+            ) : grouped ? (
+              <div className="space-y-10">
+                {grouped.map((g) => (
+                  <section key={g.category} aria-labelledby={`cat-${g.category}`}>
+                    <div className="mb-3 flex items-baseline justify-between gap-3 border-b border-border pb-2">
+                      <h2
+                        id={`cat-${g.category}`}
+                        className="font-display text-xl font-black md:text-2xl"
+                      >
+                        {g.category}
+                      </h2>
+                      <button
+                        onClick={() => setSelectedCat(g.category)}
+                        className="text-xs font-semibold uppercase tracking-wider text-primary hover:underline"
+                      >
+                        {g.items.length} items · view all
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                      {g.items.map((p) => (
+                        <ProductCard key={p.id} product={p} />
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
             ) : (
-              grouped ? (
-                <div className="space-y-10">
-                  {grouped.map((g) => (
-                    <section key={g.category} aria-labelledby={`cat-${g.category}`}>
-                      <div className="mb-3 flex items-baseline justify-between gap-3 border-b border-border pb-2">
-                        <h2
-                          id={`cat-${g.category}`}
-                          className="font-display text-xl font-black md:text-2xl"
-                        >
-                          {g.category}
-                        </h2>
-                        <button
-                          onClick={() => setSelectedCat(g.category)}
-                          className="text-xs font-semibold uppercase tracking-wider text-primary hover:underline"
-                        >
-                          {g.items.length} items · view all
-                        </button>
-                      </div>
-                      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-                        {g.items.map((p) => (
-                          <ProductCard key={p.id} product={p} />
-                        ))}
-                      </div>
-                    </section>
-                  ))}
-                </div>
-              ) : (
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {filtered.map((p) => (
                   <ProductCard key={p.id} product={p} />
                 ))}
               </div>
-              )
             )}
           </div>
         </div>

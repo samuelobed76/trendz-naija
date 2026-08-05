@@ -89,7 +89,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const clearCart = useCallback(() => setCart([]), []);
 
   const toggleWishlist = useCallback((productId: string) => {
-    setWishlist((w) => (w.includes(productId) ? w.filter((x) => x !== productId) : [...w, productId]));
+    setWishlist((w) =>
+      w.includes(productId) ? w.filter((x) => x !== productId) : [...w, productId],
+    );
   }, []);
 
   const isWished = useCallback((id: string) => wishlist.includes(id), [wishlist]);

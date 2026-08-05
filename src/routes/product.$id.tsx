@@ -17,12 +17,12 @@ export const Route = createFileRoute("/product/$id")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.product.name} — StyleNaija` },
+          { title: `${loaderData.product.name} — StitchNaija` },
           { name: "description", content: loaderData.product.description },
-          { property: "og:title", content: `${loaderData.product.name} — StyleNaija` },
+          { property: "og:title", content: `${loaderData.product.name} — StitchNaija` },
           { property: "og:description", content: loaderData.product.description },
         ]
-      : [{ title: "Product — StyleNaija" }],
+      : [{ title: "Product — StitchNaija" }],
   }),
   component: ProductPage,
   notFoundComponent: () => (
@@ -30,7 +30,10 @@ export const Route = createFileRoute("/product/$id")({
       <div className="mx-auto max-w-lg px-4 py-24 text-center">
         <h1 className="font-display text-3xl font-black">Product not found</h1>
         <p className="mt-2 text-muted-foreground">This piece may be sold out or unavailable.</p>
-        <Link to="/shop" className="mt-6 inline-flex rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground">
+        <Link
+          to="/shop"
+          className="mt-6 inline-flex rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground"
+        >
           Back to shop
         </Link>
       </div>
@@ -59,9 +62,19 @@ function ProductPage() {
     <AppShell>
       <div className="mx-auto max-w-7xl px-4 py-6 md:py-10">
         <nav className="text-xs text-muted-foreground">
-          <Link to="/" className="hover:text-primary">Home</Link> ·{" "}
-          <Link to="/shop" className="hover:text-primary">Shop</Link> ·{" "}
-          <Link to="/shop" search={{ category: product.category } as never} className="hover:text-primary">
+          <Link to="/" className="hover:text-primary">
+            Home
+          </Link>{" "}
+          ·{" "}
+          <Link to="/shop" className="hover:text-primary">
+            Shop
+          </Link>{" "}
+          ·{" "}
+          <Link
+            to="/shop"
+            search={{ category: product.category } as never}
+            className="hover:text-primary"
+          >
             {product.category}
           </Link>
         </nav>
@@ -90,7 +103,12 @@ function ProductPage() {
             <div className="mt-3 grid grid-cols-4 gap-2">
               {[product.image, product.image, product.image, product.image].map((src, i) => (
                 <div key={i} className="relative overflow-hidden rounded-xl bg-muted">
-                  <img src={src} alt="" loading="lazy" className="aspect-square w-full object-cover" />
+                  <img
+                    src={src}
+                    alt=""
+                    loading="lazy"
+                    className="aspect-square w-full object-cover"
+                  />
                   {i === 3 && (
                     <div className="absolute inset-0 grid place-items-center bg-foreground/40 text-xs font-semibold text-background">
                       ▶ Fabric video
@@ -102,7 +120,9 @@ function ProductPage() {
           </div>
 
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-primary">{product.brand}</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-primary">
+              {product.brand}
+            </p>
             <h1 className="mt-1 font-display text-3xl font-black md:text-4xl">{product.name}</h1>
             <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
               <span className="flex items-center gap-1 text-foreground">
@@ -238,11 +258,16 @@ function ProductPage() {
               <div key={r.name} className="rounded-2xl border border-border bg-card p-4">
                 <div className="flex items-center gap-1 text-accent">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className={cn("size-4", i < r.stars ? "fill-accent" : "text-muted")} />
+                    <Star
+                      key={i}
+                      className={cn("size-4", i < r.stars ? "fill-accent" : "text-muted")}
+                    />
                   ))}
                 </div>
                 <p className="mt-2 text-sm">{r.text}</p>
-                <p className="mt-3 text-xs font-semibold">{r.name} · {r.location}</p>
+                <p className="mt-3 text-xs font-semibold">
+                  {r.name} · {r.location}
+                </p>
                 <p className="text-[11px] text-muted-foreground">Size purchased: {r.size}</p>
               </div>
             ))}

@@ -135,7 +135,9 @@ export function useConversations() {
     }
     const { data } = await supabase
       .from("conversations")
-      .select("id, tailor_id, unread, updated_at, messages(id, conversation_id, sender, body, created_at)")
+      .select(
+        "id, tailor_id, unread, updated_at, messages(id, conversation_id, sender, body, created_at)",
+      )
       .eq("user_id", user.id)
       .order("updated_at", { ascending: false });
 
@@ -165,7 +167,9 @@ export function useConversations() {
     const channel = supabase
       .channel(`convos-${user.id}`)
       .on("postgres_changes", { event: "*", schema: "public", table: "messages" }, () => load())
-      .on("postgres_changes", { event: "*", schema: "public", table: "conversations" }, () => load())
+      .on("postgres_changes", { event: "*", schema: "public", table: "conversations" }, () =>
+        load(),
+      )
       .subscribe();
     return () => {
       supabase.removeChannel(channel);
@@ -246,7 +250,10 @@ export function useChat(tailorId: string, priority: boolean) {
       await supabase
         .from("messages")
         .insert({ conversation_id: id, user_id: user.id, sender: "me", body: trimmed });
-      await supabase.from("conversations").update({ updated_at: new Date().toISOString() }).eq("id", id);
+      await supabase
+        .from("conversations")
+        .update({ updated_at: new Date().toISOString() })
+        .eq("id", id);
 
       setTyping(true);
       window.setTimeout(

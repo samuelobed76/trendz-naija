@@ -1,12 +1,10 @@
 {
-  "name": "StyleNaija — Nigerian Fashion",
-  "short_name": "StyleNaija",
-  "description": "Shop Nigerian fashion, find tailors near you and chat designers directly.",
+  "name": "StitchNaija — Tailor's Workspace",
+  "short_name": "StitchNaija",
+  "description": "The workspace for Nigerian tailors and fashion designers.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#fdf8f2",
-  "theme_color": "#c2542a",
-  "icons": [
-    { "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" }
-  ]
+  "background_color": "#f5f0e0",
+  "theme_color": "#064e3b",
+  "icons": [{ "src": "/favicon.png", "sizes": "64x64", "type": "image/png" }]
 }
