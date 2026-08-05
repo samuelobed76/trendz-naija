@@ -14,7 +14,11 @@ import { Route as TailorsRouteImport } from './routes/tailors'
 import { Route as SplashRouteImport } from './routes/splash'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PremiumRouteImport } from './routes/premium'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as OrdersRouteImport } from './routes/orders'
+import { Route as MeasurementsRouteImport } from './routes/measurements'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as ClientsRouteImport } from './routes/clients'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as CartRouteImport } from './routes/cart'
@@ -50,9 +54,29 @@ const PremiumRoute = PremiumRouteImport.update({
   path: '/premium',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrdersRoute = OrdersRouteImport.update({
   id: '/orders',
   path: '/orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeasurementsRoute = MeasurementsRouteImport.update({
+  id: '/measurements',
+  path: '/measurements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClientsRoute = ClientsRouteImport.update({
+  id: '/clients',
+  path: '/clients',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -108,7 +132,11 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute
   '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
+  '/clients': typeof ClientsRoute
+  '/dashboard': typeof DashboardRoute
+  '/measurements': typeof MeasurementsRoute
   '/orders': typeof OrdersRouteWithChildren
+  '/portfolio': typeof PortfolioRoute
   '/premium': typeof PremiumRoute
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
@@ -125,7 +153,11 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
+  '/clients': typeof ClientsRoute
+  '/dashboard': typeof DashboardRoute
+  '/measurements': typeof MeasurementsRoute
   '/orders': typeof OrdersRouteWithChildren
+  '/portfolio': typeof PortfolioRoute
   '/premium': typeof PremiumRoute
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
@@ -143,7 +175,11 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute
   '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
+  '/clients': typeof ClientsRoute
+  '/dashboard': typeof DashboardRoute
+  '/measurements': typeof MeasurementsRoute
   '/orders': typeof OrdersRouteWithChildren
+  '/portfolio': typeof PortfolioRoute
   '/premium': typeof PremiumRoute
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
@@ -162,7 +198,11 @@ export interface FileRouteTypes {
     | '/cart'
     | '/chat'
     | '/checkout'
+    | '/clients'
+    | '/dashboard'
+    | '/measurements'
     | '/orders'
+    | '/portfolio'
     | '/premium'
     | '/shop'
     | '/splash'
@@ -179,7 +219,11 @@ export interface FileRouteTypes {
     | '/cart'
     | '/chat'
     | '/checkout'
+    | '/clients'
+    | '/dashboard'
+    | '/measurements'
     | '/orders'
+    | '/portfolio'
     | '/premium'
     | '/shop'
     | '/splash'
@@ -196,7 +240,11 @@ export interface FileRouteTypes {
     | '/cart'
     | '/chat'
     | '/checkout'
+    | '/clients'
+    | '/dashboard'
+    | '/measurements'
     | '/orders'
+    | '/portfolio'
     | '/premium'
     | '/shop'
     | '/splash'
@@ -214,7 +262,11 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   ChatRoute: typeof ChatRouteWithChildren
   CheckoutRoute: typeof CheckoutRoute
+  ClientsRoute: typeof ClientsRoute
+  DashboardRoute: typeof DashboardRoute
+  MeasurementsRoute: typeof MeasurementsRoute
   OrdersRoute: typeof OrdersRouteWithChildren
+  PortfolioRoute: typeof PortfolioRoute
   PremiumRoute: typeof PremiumRoute
   ShopRoute: typeof ShopRoute
   SplashRoute: typeof SplashRoute
@@ -260,11 +312,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PremiumRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/orders': {
       id: '/orders'
       path: '/orders'
       fullPath: '/orders'
       preLoaderRoute: typeof OrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/measurements': {
+      id: '/measurements'
+      path: '/measurements'
+      fullPath: '/measurements'
+      preLoaderRoute: typeof MeasurementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clients': {
+      id: '/clients'
+      path: '/clients'
+      fullPath: '/clients'
+      preLoaderRoute: typeof ClientsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -361,7 +441,11 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   ChatRoute: ChatRouteWithChildren,
   CheckoutRoute: CheckoutRoute,
+  ClientsRoute: ClientsRoute,
+  DashboardRoute: DashboardRoute,
+  MeasurementsRoute: MeasurementsRoute,
   OrdersRoute: OrdersRouteWithChildren,
+  PortfolioRoute: PortfolioRoute,
   PremiumRoute: PremiumRoute,
   ShopRoute: ShopRoute,
   SplashRoute: SplashRoute,
