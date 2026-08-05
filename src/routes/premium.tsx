@@ -10,17 +10,17 @@ export const Route = createFileRoute("/premium")({
   component: PremiumPage,
   head: () => ({
     meta: [
-      { title: "StyleNaija Prime — Premium Fashion Membership" },
+      { title: "StitchNaija Prime — Premium Tailor Membership" },
       {
         name: "description",
         content:
-          "Join StyleNaija Prime for free nationwide delivery, priority tailor chat, early access to drops and free personal styling.",
+          "Join StitchNaija Prime for verified badge, priority client chat, analytics and free styling sessions.",
       },
-      { property: "og:title", content: "StyleNaija Prime — Premium Fashion Membership" },
+      { property: "og:title", content: "StitchNaija Prime — Premium Tailor Membership" },
       {
         property: "og:description",
         content:
-          "Free delivery, priority tailor chat, early drops and monthly styling sessions from ₦4,500/month.",
+          "Verified badge, analytics, priority chat and monthly styling sessions from ₦4,500/month.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -41,17 +41,17 @@ function PremiumPage() {
 
   return (
     <AppShell>
-      <section className="gradient-warm text-primary-foreground">
+      <section className="gradient-emerald text-primary-foreground">
         <div className="mx-auto max-w-5xl px-4 py-12 md:py-16">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
             <Crown className="size-3.5" /> Membership
           </span>
           <h1 className="mt-3 max-w-2xl font-display text-3xl font-black leading-tight md:text-5xl">
-            StyleNaija Prime
+            StitchNaija Prime
           </h1>
           <p className="mt-3 max-w-xl text-sm text-primary-foreground/90 md:text-base">
-            Free delivery everywhere in Nigeria, tailors that reply you first, and first
-            dibs on every owambe drop.
+            Verified badge, analytics, priority client replies and first dibs on every new
+            feature.
           </p>
           <div className="mt-6 flex flex-wrap gap-4 text-sm">
             <span className="inline-flex items-center gap-2">
@@ -71,7 +71,7 @@ function PremiumPage() {
         {membership.active ? (
           <div className="rounded-3xl border border-primary/40 bg-card p-6 shadow-sm md:p-8">
             <div className="flex items-center gap-3">
-              <span className="grid size-12 place-items-center rounded-full gradient-warm text-primary-foreground">
+              <span className="grid size-12 place-items-center rounded-full gradient-gold text-primary-foreground">
                 <Crown className="size-6" />
               </span>
               <div>
@@ -93,7 +93,7 @@ function PremiumPage() {
                 to="/chat"
                 className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground"
               >
-                Chat a tailor now
+                Chat clients now
               </Link>
               <button
                 onClick={() => {
