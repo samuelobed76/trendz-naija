@@ -179,3 +179,90 @@
   background-clip: text;
   color: transparent;
 }
+
+/* ── Splash screen ─────────────────────────────────────── */
+@utility gradient-splash {
+  background-image:
+    radial-gradient(120% 80% at 50% -10%, oklch(0.42 0.09 165 / 0.55), transparent 60%),
+    radial-gradient(90% 60% at 10% 110%, oklch(0.75 0.13 85 / 0.18), transparent 65%),
+    linear-gradient(160deg, oklch(0.16 0.03 158), oklch(0.11 0.02 155) 55%, oklch(0.14 0.03 168));
+}
+
+@keyframes splash-stitch {
+  from {
+    stroke-dashoffset: 640;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes splash-spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes splash-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes splash-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 oklch(0.75 0.13 85 / 0.35);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 44px 6px oklch(0.75 0.13 85 / 0.18);
+  }
+}
+
+@keyframes splash-sheen {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  60%,
+  100% {
+    transform: translateX(220%) skewX(-18deg);
+  }
+}
+
+@utility splash-stitch-path {
+  stroke-dasharray: 12 10;
+  animation: splash-stitch 2.4s linear infinite;
+}
+
+@utility splash-ring-spin {
+  animation: splash-spin-slow 18s linear infinite;
+}
+
+@utility splash-breathe {
+  animation: splash-breathe 2.8s ease-in-out infinite;
+}
+
+@utility splash-sheen {
+  animation: splash-sheen 2.6s ease-in-out infinite;
+}
+
+@utility splash-rise {
+  animation: splash-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-stitch-path,
+  .splash-ring-spin,
+  .splash-breathe,
+  .splash-sheen,
+  .splash-rise {
+    animation: none;
+  }
+}
