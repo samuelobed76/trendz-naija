@@ -97,7 +97,7 @@ export function SplashArt({
           Stitch<span className="text-gradient-gold">Naija</span>
         </h1>
         <p
-          className="mt-2 h-px w-24 bg-gradient-to-r from-transparent via-gold/70 to-transparent splash-rise"
+          className="mt-3 h-[2px] w-24 rounded-full bg-gradient-to-r from-transparent via-gold to-transparent splash-rise"
           style={{ animationDelay: "220ms" }}
         />
         <p
