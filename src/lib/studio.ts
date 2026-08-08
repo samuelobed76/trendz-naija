@@ -197,7 +197,9 @@ export function useStudio() {
     setData(loadStudio());
     const l = () => setData({ ...loadStudio() });
     listeners.add(l);
-    return () => listeners.delete(l);
+    return () => {
+      listeners.delete(l);
+    };
   }, []);
   const mutate = useCallback((patch: (d: StudioData) => StudioData) => updateStudio(patch), []);
   return { data, mutate };
