@@ -1,6 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Plus, Search, Ruler, Phone } from "lucide-react";
+import { MessageCircle, Phone, Plus, Search, X } from "lucide-react";
+import { useMemo, useState } from "react";
 import { AppShell } from "@/components/layout/AppShell";
+import { EmptyState, Field, inputCls, PageHeader } from "@/components/studio/Bits";
+import {
+  addClient,
+  balanceOf,
+  formatNaira,
+  paidTotal,
+  useStudio,
+  waLink,
+} from "@/lib/studio";
 
 export const Route = createFileRoute("/clients")({
   component: Clients,
