@@ -109,6 +109,13 @@ function Header() {
               Orders
             </Link>
             <Link
+              to="/jobs"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
+              Work board
+            </Link>
+            <Link
               to="/clients"
               onClick={() => setOpen(false)}
               className="rounded-md px-3 py-2 hover:bg-muted"
