@@ -28,6 +28,7 @@ import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 import { Route as OrdersIdRouteImport } from './routes/orders.$id'
+import { Route as JobsIdRouteImport } from './routes/jobs.$id'
 import { Route as ClientsIdRouteImport } from './routes/clients.$id'
 import { Route as ChatTailorIdRouteImport } from './routes/chat.$tailorId'
 
@@ -126,6 +127,11 @@ const OrdersIdRoute = OrdersIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => OrdersRoute,
 } as any)
+const JobsIdRoute = JobsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => JobsRoute,
+} as any)
 const ClientsIdRoute = ClientsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -146,7 +152,7 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/clients': typeof ClientsRouteWithChildren
   '/dashboard': typeof DashboardRoute
-  '/jobs': typeof JobsRoute
+  '/jobs': typeof JobsRouteWithChildren
   '/measurements': typeof MeasurementsRoute
   '/orders': typeof OrdersRouteWithChildren
   '/portfolio': typeof PortfolioRoute
@@ -157,6 +163,7 @@ export interface FileRoutesByFullPath {
   '/wishlist': typeof WishlistRoute
   '/chat/$tailorId': typeof ChatTailorIdRoute
   '/clients/$id': typeof ClientsIdRoute
+  '/jobs/$id': typeof JobsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
 }
@@ -169,7 +176,7 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutRoute
   '/clients': typeof ClientsRouteWithChildren
   '/dashboard': typeof DashboardRoute
-  '/jobs': typeof JobsRoute
+  '/jobs': typeof JobsRouteWithChildren
   '/measurements': typeof MeasurementsRoute
   '/orders': typeof OrdersRouteWithChildren
   '/portfolio': typeof PortfolioRoute
@@ -180,6 +187,7 @@ export interface FileRoutesByTo {
   '/wishlist': typeof WishlistRoute
   '/chat/$tailorId': typeof ChatTailorIdRoute
   '/clients/$id': typeof ClientsIdRoute
+  '/jobs/$id': typeof JobsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
 }
@@ -193,7 +201,7 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRoute
   '/clients': typeof ClientsRouteWithChildren
   '/dashboard': typeof DashboardRoute
-  '/jobs': typeof JobsRoute
+  '/jobs': typeof JobsRouteWithChildren
   '/measurements': typeof MeasurementsRoute
   '/orders': typeof OrdersRouteWithChildren
   '/portfolio': typeof PortfolioRoute
@@ -204,6 +212,7 @@ export interface FileRoutesById {
   '/wishlist': typeof WishlistRoute
   '/chat/$tailorId': typeof ChatTailorIdRoute
   '/clients/$id': typeof ClientsIdRoute
+  '/jobs/$id': typeof JobsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
 }
@@ -229,6 +238,7 @@ export interface FileRouteTypes {
     | '/wishlist'
     | '/chat/$tailorId'
     | '/clients/$id'
+    | '/jobs/$id'
     | '/orders/$id'
     | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -252,6 +262,7 @@ export interface FileRouteTypes {
     | '/wishlist'
     | '/chat/$tailorId'
     | '/clients/$id'
+    | '/jobs/$id'
     | '/orders/$id'
     | '/product/$id'
   id:
@@ -275,6 +286,7 @@ export interface FileRouteTypes {
     | '/wishlist'
     | '/chat/$tailorId'
     | '/clients/$id'
+    | '/jobs/$id'
     | '/orders/$id'
     | '/product/$id'
   fileRoutesById: FileRoutesById
@@ -288,7 +300,7 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   ClientsRoute: typeof ClientsRouteWithChildren
   DashboardRoute: typeof DashboardRoute
-  JobsRoute: typeof JobsRoute
+  JobsRoute: typeof JobsRouteWithChildren
   MeasurementsRoute: typeof MeasurementsRoute
   OrdersRoute: typeof OrdersRouteWithChildren
   PortfolioRoute: typeof PortfolioRoute
@@ -435,6 +447,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OrdersIdRouteImport
       parentRoute: typeof OrdersRoute
     }
+    '/jobs/$id': {
+      id: '/jobs/$id'
+      path: '/$id'
+      fullPath: '/jobs/$id'
+      preLoaderRoute: typeof JobsIdRouteImport
+      parentRoute: typeof JobsRoute
+    }
     '/clients/$id': {
       id: '/clients/$id'
       path: '/$id'
@@ -473,6 +492,16 @@ const ClientsRouteChildren: ClientsRouteChildren = {
 const ClientsRouteWithChildren =
   ClientsRoute._addFileChildren(ClientsRouteChildren)
 
+interface JobsRouteChildren {
+  JobsIdRoute: typeof JobsIdRoute
+}
+
+const JobsRouteChildren: JobsRouteChildren = {
+  JobsIdRoute: JobsIdRoute,
+}
+
+const JobsRouteWithChildren = JobsRoute._addFileChildren(JobsRouteChildren)
+
 interface OrdersRouteChildren {
   OrdersIdRoute: typeof OrdersIdRoute
 }
@@ -493,7 +522,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   ClientsRoute: ClientsRouteWithChildren,
   DashboardRoute: DashboardRoute,
-  JobsRoute: JobsRoute,
+  JobsRoute: JobsRouteWithChildren,
   MeasurementsRoute: MeasurementsRoute,
   OrdersRoute: OrdersRouteWithChildren,
   PortfolioRoute: PortfolioRoute,

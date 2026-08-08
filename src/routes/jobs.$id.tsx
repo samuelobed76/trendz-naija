@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, MessageCircle, Trash2 } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { Badge, EmptyState, Field, inputCls, PageHeader, Stat } from "@/components/studio/Bits";
-import { Banknote, Scissors, CalendarDays } from "lucide-react";
+import { Banknote, Scissors } from "lucide-react";
 import {
   addPayment,
   balanceOf,
@@ -204,12 +204,6 @@ function JobDetail() {
               </a>
             </>
           ) : null}
-          <Link
-            to="/calendar"
-            className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-semibold hover:bg-muted"
-          >
-            <CalendarDays className="size-4" /> Calendar
-          </Link>
           <button
             onClick={() => {
               removeJob(job.id);
