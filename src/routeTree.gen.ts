@@ -18,11 +18,13 @@ import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as MeasurementsRouteImport } from './routes/measurements'
 import { Route as JobsRouteImport } from './routes/jobs'
+import { Route as FabricsRouteImport } from './routes/fabrics'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ClientsRouteImport } from './routes/clients'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
@@ -77,6 +79,11 @@ const JobsRoute = JobsRouteImport.update({
   path: '/jobs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FabricsRoute = FabricsRouteImport.update({
+  id: '/fabrics',
+  path: '/fabrics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -100,6 +107,11 @@ const ChatRoute = ChatRouteImport.update({
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalendarRoute = CalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -147,11 +159,13 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/auth': typeof AuthRoute
+  '/calendar': typeof CalendarRoute
   '/cart': typeof CartRoute
   '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
   '/clients': typeof ClientsRouteWithChildren
   '/dashboard': typeof DashboardRoute
+  '/fabrics': typeof FabricsRoute
   '/jobs': typeof JobsRouteWithChildren
   '/measurements': typeof MeasurementsRoute
   '/orders': typeof OrdersRouteWithChildren
@@ -171,11 +185,13 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/auth': typeof AuthRoute
+  '/calendar': typeof CalendarRoute
   '/cart': typeof CartRoute
   '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
   '/clients': typeof ClientsRouteWithChildren
   '/dashboard': typeof DashboardRoute
+  '/fabrics': typeof FabricsRoute
   '/jobs': typeof JobsRouteWithChildren
   '/measurements': typeof MeasurementsRoute
   '/orders': typeof OrdersRouteWithChildren
@@ -196,11 +212,13 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/auth': typeof AuthRoute
+  '/calendar': typeof CalendarRoute
   '/cart': typeof CartRoute
   '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
   '/clients': typeof ClientsRouteWithChildren
   '/dashboard': typeof DashboardRoute
+  '/fabrics': typeof FabricsRoute
   '/jobs': typeof JobsRouteWithChildren
   '/measurements': typeof MeasurementsRoute
   '/orders': typeof OrdersRouteWithChildren
@@ -222,11 +240,13 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/auth'
+    | '/calendar'
     | '/cart'
     | '/chat'
     | '/checkout'
     | '/clients'
     | '/dashboard'
+    | '/fabrics'
     | '/jobs'
     | '/measurements'
     | '/orders'
@@ -246,11 +266,13 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/auth'
+    | '/calendar'
     | '/cart'
     | '/chat'
     | '/checkout'
     | '/clients'
     | '/dashboard'
+    | '/fabrics'
     | '/jobs'
     | '/measurements'
     | '/orders'
@@ -270,11 +292,13 @@ export interface FileRouteTypes {
     | '/'
     | '/account'
     | '/auth'
+    | '/calendar'
     | '/cart'
     | '/chat'
     | '/checkout'
     | '/clients'
     | '/dashboard'
+    | '/fabrics'
     | '/jobs'
     | '/measurements'
     | '/orders'
@@ -295,11 +319,13 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
   AuthRoute: typeof AuthRoute
+  CalendarRoute: typeof CalendarRoute
   CartRoute: typeof CartRoute
   ChatRoute: typeof ChatRouteWithChildren
   CheckoutRoute: typeof CheckoutRoute
   ClientsRoute: typeof ClientsRouteWithChildren
   DashboardRoute: typeof DashboardRoute
+  FabricsRoute: typeof FabricsRoute
   JobsRoute: typeof JobsRouteWithChildren
   MeasurementsRoute: typeof MeasurementsRoute
   OrdersRoute: typeof OrdersRouteWithChildren
@@ -377,6 +403,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JobsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fabrics': {
+      id: '/fabrics'
+      path: '/fabrics'
+      fullPath: '/fabrics'
+      preLoaderRoute: typeof FabricsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -410,6 +443,13 @@ declare module '@tanstack/react-router' {
       path: '/cart'
       fullPath: '/cart'
       preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calendar': {
+      id: '/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof CalendarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -517,11 +557,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
   AuthRoute: AuthRoute,
+  CalendarRoute: CalendarRoute,
   CartRoute: CartRoute,
   ChatRoute: ChatRouteWithChildren,
   CheckoutRoute: CheckoutRoute,
   ClientsRoute: ClientsRouteWithChildren,
   DashboardRoute: DashboardRoute,
+  FabricsRoute: FabricsRoute,
   JobsRoute: JobsRouteWithChildren,
   MeasurementsRoute: MeasurementsRoute,
   OrdersRoute: OrdersRouteWithChildren,
