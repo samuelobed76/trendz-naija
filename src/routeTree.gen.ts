@@ -13,17 +13,21 @@ import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as TailorsRouteImport } from './routes/tailors'
 import { Route as SplashRouteImport } from './routes/splash'
 import { Route as ShopRouteImport } from './routes/shop'
+import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as PremiumRouteImport } from './routes/premium'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as MeasurementsRouteImport } from './routes/measurements'
 import { Route as JobsRouteImport } from './routes/jobs'
+import { Route as FabricsRouteImport } from './routes/fabrics'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ClientsRouteImport } from './routes/clients'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
@@ -52,6 +56,11 @@ const ShopRoute = ShopRouteImport.update({
   path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PremiumRoute = PremiumRouteImport.update({
   id: '/premium',
   path: '/premium',
@@ -75,6 +84,11 @@ const MeasurementsRoute = MeasurementsRouteImport.update({
 const JobsRoute = JobsRouteImport.update({
   id: '/jobs',
   path: '/jobs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FabricsRoute = FabricsRouteImport.update({
+  id: '/fabrics',
+  path: '/fabrics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -102,9 +116,19 @@ const CartRoute = CartRouteImport.update({
   path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CalendarRoute = CalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccountRoute = AccountRouteImport.update({
@@ -146,17 +170,21 @@ const ChatTailorIdRoute = ChatTailorIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
+  '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
+  '/calendar': typeof CalendarRoute
   '/cart': typeof CartRoute
   '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
   '/clients': typeof ClientsRouteWithChildren
   '/dashboard': typeof DashboardRoute
+  '/fabrics': typeof FabricsRoute
   '/jobs': typeof JobsRouteWithChildren
   '/measurements': typeof MeasurementsRoute
   '/orders': typeof OrdersRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/premium': typeof PremiumRoute
+  '/reviews': typeof ReviewsRoute
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
@@ -170,17 +198,21 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
+  '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
+  '/calendar': typeof CalendarRoute
   '/cart': typeof CartRoute
   '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
   '/clients': typeof ClientsRouteWithChildren
   '/dashboard': typeof DashboardRoute
+  '/fabrics': typeof FabricsRoute
   '/jobs': typeof JobsRouteWithChildren
   '/measurements': typeof MeasurementsRoute
   '/orders': typeof OrdersRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/premium': typeof PremiumRoute
+  '/reviews': typeof ReviewsRoute
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
@@ -195,17 +227,21 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
+  '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
+  '/calendar': typeof CalendarRoute
   '/cart': typeof CartRoute
   '/chat': typeof ChatRouteWithChildren
   '/checkout': typeof CheckoutRoute
   '/clients': typeof ClientsRouteWithChildren
   '/dashboard': typeof DashboardRoute
+  '/fabrics': typeof FabricsRoute
   '/jobs': typeof JobsRouteWithChildren
   '/measurements': typeof MeasurementsRoute
   '/orders': typeof OrdersRouteWithChildren
   '/portfolio': typeof PortfolioRoute
   '/premium': typeof PremiumRoute
+  '/reviews': typeof ReviewsRoute
   '/shop': typeof ShopRoute
   '/splash': typeof SplashRoute
   '/tailors': typeof TailorsRoute
@@ -221,17 +257,21 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/account'
+    | '/analytics'
     | '/auth'
+    | '/calendar'
     | '/cart'
     | '/chat'
     | '/checkout'
     | '/clients'
     | '/dashboard'
+    | '/fabrics'
     | '/jobs'
     | '/measurements'
     | '/orders'
     | '/portfolio'
     | '/premium'
+    | '/reviews'
     | '/shop'
     | '/splash'
     | '/tailors'
@@ -245,17 +285,21 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/account'
+    | '/analytics'
     | '/auth'
+    | '/calendar'
     | '/cart'
     | '/chat'
     | '/checkout'
     | '/clients'
     | '/dashboard'
+    | '/fabrics'
     | '/jobs'
     | '/measurements'
     | '/orders'
     | '/portfolio'
     | '/premium'
+    | '/reviews'
     | '/shop'
     | '/splash'
     | '/tailors'
@@ -269,17 +313,21 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/account'
+    | '/analytics'
     | '/auth'
+    | '/calendar'
     | '/cart'
     | '/chat'
     | '/checkout'
     | '/clients'
     | '/dashboard'
+    | '/fabrics'
     | '/jobs'
     | '/measurements'
     | '/orders'
     | '/portfolio'
     | '/premium'
+    | '/reviews'
     | '/shop'
     | '/splash'
     | '/tailors'
@@ -294,17 +342,21 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
+  AnalyticsRoute: typeof AnalyticsRoute
   AuthRoute: typeof AuthRoute
+  CalendarRoute: typeof CalendarRoute
   CartRoute: typeof CartRoute
   ChatRoute: typeof ChatRouteWithChildren
   CheckoutRoute: typeof CheckoutRoute
   ClientsRoute: typeof ClientsRouteWithChildren
   DashboardRoute: typeof DashboardRoute
+  FabricsRoute: typeof FabricsRoute
   JobsRoute: typeof JobsRouteWithChildren
   MeasurementsRoute: typeof MeasurementsRoute
   OrdersRoute: typeof OrdersRouteWithChildren
   PortfolioRoute: typeof PortfolioRoute
   PremiumRoute: typeof PremiumRoute
+  ReviewsRoute: typeof ReviewsRoute
   ShopRoute: typeof ShopRoute
   SplashRoute: typeof SplashRoute
   TailorsRoute: typeof TailorsRoute
@@ -342,6 +394,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/premium': {
       id: '/premium'
       path: '/premium'
@@ -375,6 +434,13 @@ declare module '@tanstack/react-router' {
       path: '/jobs'
       fullPath: '/jobs'
       preLoaderRoute: typeof JobsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fabrics': {
+      id: '/fabrics'
+      path: '/fabrics'
+      fullPath: '/fabrics'
+      preLoaderRoute: typeof FabricsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -412,11 +478,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/calendar': {
+      id: '/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof CalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/account': {
@@ -516,17 +596,21 @@ const OrdersRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
+  AnalyticsRoute: AnalyticsRoute,
   AuthRoute: AuthRoute,
+  CalendarRoute: CalendarRoute,
   CartRoute: CartRoute,
   ChatRoute: ChatRouteWithChildren,
   CheckoutRoute: CheckoutRoute,
   ClientsRoute: ClientsRouteWithChildren,
   DashboardRoute: DashboardRoute,
+  FabricsRoute: FabricsRoute,
   JobsRoute: JobsRouteWithChildren,
   MeasurementsRoute: MeasurementsRoute,
   OrdersRoute: OrdersRouteWithChildren,
   PortfolioRoute: PortfolioRoute,
   PremiumRoute: PremiumRoute,
+  ReviewsRoute: ReviewsRoute,
   ShopRoute: ShopRoute,
   SplashRoute: SplashRoute,
   TailorsRoute: TailorsRoute,
@@ -536,3 +620,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
