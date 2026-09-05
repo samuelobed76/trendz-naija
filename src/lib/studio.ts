@@ -23,7 +23,13 @@ export const JOB_STAGES: { id: JobStatus; label: string; hint: string }[] = [
   { id: "delivered", label: "Delivered", hint: "Handed over and paid" },
 ];
 
-export type Payment = { id: string; amount: number; method: string; at: string };
+export type Payment = {
+  id: string;
+  amount: number;
+  method: string;
+  at: string;
+  reference?: string;
+};
 
 export type Job = {
   id: string;
