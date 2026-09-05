@@ -130,6 +130,8 @@ function JobDetail() {
           </div>
         </div>
 
+        <PaystackPay job={job} clientName={client?.name ?? "Client"} />
+
         {/* Payments */}
         <section className="mt-8">
           <h2 className="font-display text-xl font-black">Payments</h2>
