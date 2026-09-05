@@ -63,9 +63,16 @@ function Header() {
           <Link to="/clients" className="hover:text-emerald transition-colors">
             Clients
           </Link>
+          <Link to="/calendar" className="hover:text-emerald transition-colors">
+            Calendar
+          </Link>
+          <Link to="/analytics" className="hover:text-emerald transition-colors">
+            Analytics
+          </Link>
           <Link to="/chat" className="hover:text-emerald transition-colors">
             Messages
           </Link>
+
         </nav>
         <div className="ml-auto flex items-center gap-1">
           <Link
@@ -130,12 +137,41 @@ function Header() {
               Measurements
             </Link>
             <Link
+              to="/calendar"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
+              Fittings calendar
+            </Link>
+            <Link
+              to="/fabrics"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
+              Fabric inventory
+            </Link>
+            <Link
+              to="/analytics"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
+              Analytics
+            </Link>
+            <Link
+              to="/reviews"
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2 hover:bg-muted"
+            >
+              Reviews
+            </Link>
+            <Link
               to="/chat"
               onClick={() => setOpen(false)}
               className="rounded-md px-3 py-2 hover:bg-muted"
             >
               Messages
             </Link>
+
             <Link
               to="/account"
               onClick={() => setOpen(false)}
