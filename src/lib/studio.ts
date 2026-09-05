@@ -243,14 +243,32 @@ export function updateJob(jid: string, patch: Partial<Job>) {
 export function removeJob(jid: string) {
   updateStudio((d) => ({ ...d, jobs: d.jobs.filter((j) => j.id !== jid) }));
 }
-export function addPayment(jid: string, amount: number, method: string) {
+export function addPayment(
+  jid: string,
+  amount: number,
+  method: string,
+  extra?: { reference?: string; at?: string },
+) {
   updateStudio((d) => ({
     ...d,
-    jobs: d.jobs.map((j) =>
-      j.id === jid
-        ? { ...j, payments: [...j.payments, { id: id("p"), amount, method, at: new Date().toISOString() }] }
-        : j,
-    ),
+    jobs: d.jobs.map((j) => {
+      if (j.id !== jid) return j;
+      // never double-count the same Paystack transaction
+      if (extra?.reference && j.payments.some((p) => p.reference === extra.reference)) return j;
+      return {
+        ...j,
+        payments: [
+          ...j.payments,
+          {
+            id: id("p"),
+            amount,
+            method,
+            at: extra?.at ?? new Date().toISOString(),
+            ...(extra?.reference ? { reference: extra.reference } : {}),
+          },
+        ],
+      };
+    }),
   }));
 }
 
