@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, MessageCircle, Trash2 } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { Badge, EmptyState, Field, inputCls, PageHeader, Stat } from "@/components/studio/Bits";
+import { PaystackPay } from "@/components/studio/PaystackPay";
 import { Banknote, Scissors } from "lucide-react";
 import {
   addPayment,
@@ -129,6 +130,8 @@ function JobDetail() {
             </Field>
           </div>
         </div>
+
+        <PaystackPay job={job} clientName={client?.name ?? "Client"} />
 
         {/* Payments */}
         <section className="mt-8">
