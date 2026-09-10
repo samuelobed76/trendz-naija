@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { AlertTriangle, Plus, X } from "lucide-react";
 import { useState } from "react";
 import { AppShell } from "@/components/layout/AppShell";
