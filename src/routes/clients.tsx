@@ -30,6 +30,9 @@ export const Route = createFileRoute("/clients")({
 });
 
 function Clients() {
+  const path = useRouterState({ select: (s) => s.location.pathname });
+  if (path !== "/clients") return <Outlet />;
+
   const { data } = useStudio();
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
