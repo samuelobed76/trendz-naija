@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { AlertTriangle, Plus, X } from "lucide-react";
 import { useState } from "react";
 import { AppShell } from "@/components/layout/AppShell";
@@ -35,6 +35,9 @@ export const Route = createFileRoute("/jobs")({
 });
 
 function Jobs() {
+  const path = useRouterState({ select: (s) => s.location.pathname });
+  if (path !== "/jobs") return <Outlet />;
+
   const { data } = useStudio();
   const [open, setOpen] = useState(false);
   const [filter, setFilter] = useState<JobStatus | "all">("all");

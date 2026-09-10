@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { MessageCircle, Phone, Plus, Search, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { AppShell } from "@/components/layout/AppShell";
@@ -30,6 +30,9 @@ export const Route = createFileRoute("/clients")({
 });
 
 function Clients() {
+  const path = useRouterState({ select: (s) => s.location.pathname });
+  if (path !== "/clients") return <Outlet />;
+
   const { data } = useStudio();
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
